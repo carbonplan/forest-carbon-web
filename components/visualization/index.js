@@ -130,6 +130,7 @@ export default function Visualization({ data, options }) {
           data={totals}
           domain={[2001, 2018]}
           range={[min, max]}
+          selected={{ x: options.year, y: total }}
           color='red'
         />
       </Box>

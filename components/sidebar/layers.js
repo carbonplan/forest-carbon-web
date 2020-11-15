@@ -119,7 +119,7 @@ function Layers({ options, setOptions, children }) {
           <Info margin={'22px'}>We analyze data from 2001 to 2018.</Info>
         </Text>
         <Slider
-          sx={{ mt: [3], mb: [3] }}
+          sx={{ mt: [3], mb: [3], width: '314px' }}
           value={parseFloat(options['year'])}
           onChange={(e) => setSlider('year', e.target.value)}
           min={2001}
@@ -140,6 +140,7 @@ function Layers({ options, setOptions, children }) {
             fontFamily: 'monospace',
             float: 'right',
             display: 'inline-block',
+            mr: ['4px'],
           }}
         >
           2018

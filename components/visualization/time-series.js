@@ -3,12 +3,12 @@ import { useThemeUI, Box, Flex, Button } from 'theme-ui'
 import * as d3 from 'd3'
 import * as P from 'polished'
 
-export default function TimeSeries({ data, domain, range, color }) {
+export default function TimeSeries({ data, domain, range, selected, color }) {
   const boxRef = useRef(null)
   const { theme } = useThemeUI()
 
   useEffect(() => {
-    const margin = { top: 10, right: 0, bottom: 10, left: 0 }
+    const margin = { top: 10, right: 11, bottom: 10, left: 9 }
     const width = boxRef.current.offsetWidth - margin.left - margin.right
     const height = boxRef.current.offsetHeight - margin.top - margin.bottom
 
@@ -84,6 +84,13 @@ export default function TimeSeries({ data, domain, range, color }) {
     //   .style('font-size', 14)
     //   .style('font-family', theme.fonts.faux)
     //   .text(range[1])
+
+    svg
+      .append('circle')
+      .attr('cx', x(selected.x))
+      .attr('cy', y(selected.y))
+      .attr('r', 8.5)
+      .attr('fill', theme.colors[color])
 
     svg
       .append('path')
