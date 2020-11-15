@@ -19,7 +19,7 @@ function Map({ onMapReady, options, onChangeRegion = (region) => {} }) {
       minZoom: 2,
       maxZoom: 9,
       maxBounds: [
-        [-155, -50],
+        [-141, -50],
         [-25, 60],
       ],
     })

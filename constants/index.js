@@ -41,7 +41,7 @@ the console.
 Based on initial testing, it looks like querySourceFeatures does
 duplicate points, but queryRenderedFeatures does not.
 */
-export const DEDUPE_ON_FILTER = false
+export const DEDUPE_ON_FILTER = true
 
 //// CIRCLE FILTER ////
 

@@ -1,24 +1,11 @@
 import { bbox, booleanPointInPolygon, distance } from '@turf/turf'
+import { uniqBy } from 'lodash'
 import pointInPolygon from 'point-in-polygon'
 import { DEDUPE_ON_FILTER, filterTypes } from '@constants'
 
-// dedupe points by lat and lon
+// dedupe points by unique indices
 function dedupedPoints(points) {
-  const deduped = []
-
-  points.forEach((point) => {
-    const duplicatePoint = deduped.find(
-      (d) =>
-        d.geometry.coordinates[0] === point.geometry.coordinates[0] &&
-        d.geometry.coordinates[1] === point.geometry.coordinates[1] &&
-        d.properties.y === point.properties.y &&
-        d.properties.e === point.properties.e
-    )
-
-    if (!duplicatePoint) deduped.push(point)
-  })
-
-  return deduped
+  return uniqBy(points, 'properties.i')
 }
 
 /*
