@@ -22,11 +22,7 @@ function Viewer() {
 
   useEffect(() => {
     if (!map) return
-    const data = getSelectedData(
-      map,
-      ['forests'],
-      region
-    )
+    const data = getSelectedData(map, ['forests'], region)
     setSelectedData(data)
   }, [map, region, bounds])
 

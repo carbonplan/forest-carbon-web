@@ -10,7 +10,7 @@ function dedupedPoints(points) {
     const duplicatePoint = deduped.find(
       (d) =>
         d.geometry.coordinates[0] === point.geometry.coordinates[0] &&
-        d.geometry.coordinates[1] === point.geometry.coordinates[1] && 
+        d.geometry.coordinates[1] === point.geometry.coordinates[1] &&
         d.properties.y === point.properties.y &&
         d.properties.e === point.properties.e
     )
@@ -132,22 +132,24 @@ Then filter again by checking whether each point is in the selectedRegion.
 
 function getFilteredPoints(map, layer, selectedRegion) {
   const geoBox = bbox(selectedRegion)
-  let points = map.querySourceFeatures('emissions', { 
-    sourceLayer: 'forests', 
-    validate: false 
+  let points = map.querySourceFeatures('emissions', {
+    sourceLayer: 'forests',
+    validate: false,
   })
   points = points.filter((d) => {
-    return d.geometry.coordinates[0] > geoBox[0] &&
-    d.geometry.coordinates[0] < geoBox[2] &&
-    d.geometry.coordinates[1] > geoBox[1] &&
-    d.geometry.coordinates[1] < geoBox[3]
+    return (
+      d.geometry.coordinates[0] > geoBox[0] &&
+      d.geometry.coordinates[0] < geoBox[2] &&
+      d.geometry.coordinates[1] > geoBox[1] &&
+      d.geometry.coordinates[1] < geoBox[3]
+    )
   })
   return getPointsInRegion(points, selectedRegion)
 }
 
 //// queryRenderedFeatures ////
 
-// 
+//
 // function getFilteredPoints(map, layer, selectedRegion) {
 //   const geoBox = bbox(selectedRegion)
 //   const screenBox = geoBoxToScreenBox(map, geoBox)

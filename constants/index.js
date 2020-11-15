@@ -1,6 +1,8 @@
 export const allOptions = {
   scenarios: ['SSP2-4.5', 'SSP3-7.0', 'SSP5-8.5'],
-  years: Array(18).fill(0).map((_, i) => (i + 2001).toString()),
+  years: Array(18)
+    .fill(0)
+    .map((_, i) => (i + 2001).toString()),
 }
 
 export const optionIndex = (label, value) => {
@@ -16,7 +18,7 @@ export const optionKey = (options) => {
 }
 
 export const colorRanges = {
-  'forests': [5, 100],
+  forests: [5, 100],
 }
 
 export const filterTypes = {

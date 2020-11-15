@@ -19,7 +19,6 @@ function useOptions(map, options) {
     }
 
     updateLayer('forests')
-
   }, [context, options])
 }
 

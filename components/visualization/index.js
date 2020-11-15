@@ -27,7 +27,9 @@ export default function Visualization({ data, options }) {
   let totals = []
 
   years.forEach((year, index) => {
-    const subset = points['forests'].filter((d) => {return d.properties.y == parseInt(year)})
+    const subset = points['forests'].filter((d) => {
+      return d.properties.y == parseInt(year)
+    })
     let total
     if (subset.length > 0) {
       total = subset.reduce((a, b) => a + b.properties.e, 0) / subset.length
@@ -120,15 +122,16 @@ export default function Visualization({ data, options }) {
       <Box sx={sx.group}>
         <Text sx={sx.label}>
           Emissions
-          <Info margin={'14px'}>
-            Explain emissions
-          </Info>
+          <Info margin={'14px'}>Explain emissions</Info>
         </Text>
-        <Text sx={{ ...sx.numberLeft, color: 'red' }}>
-          {total.toFixed(2)}
-        </Text>
+        <Text sx={{ ...sx.numberLeft, color: 'red' }}>{total.toFixed(2)}</Text>
         <Text sx={{ ...sx.unit, mb: [3] }}>t / CO2 / ha</Text>
-        <TimeSeries data={totals} domain={[2001, 2018]} range={[min, max]} color='red'/>
+        <TimeSeries
+          data={totals}
+          domain={[2001, 2018]}
+          range={[min, max]}
+          color='red'
+        />
       </Box>
     </Box>
   )

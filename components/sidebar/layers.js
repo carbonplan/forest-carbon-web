@@ -109,18 +109,14 @@ function Layers({ options, setOptions, children }) {
       <Box sx={sx.group}>
         <Text sx={sx.label}>
           Emissions
-          <Info>
-            Explanation of forest-based emissions.
-          </Info>
+          <Info>Explanation of forest-based emissions.</Info>
         </Text>
         <Option value='forests' color='red' />
       </Box>
       <Box sx={sx.group}>
         <Text sx={sx.label}>
           Time
-          <Info margin={'22px'}>
-            We analyze data from 2001 to 2018.
-          </Info>
+          <Info margin={'22px'}>We analyze data from 2001 to 2018.</Info>
         </Text>
         <Slider
           sx={{ mt: [3], mb: [3] }}
