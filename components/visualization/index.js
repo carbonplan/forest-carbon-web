@@ -44,7 +44,7 @@ export default function Visualization({ data, options }) {
 
   const min = totals.reduce((a, b) => Math.min(a, b.y), totals[0].y)
   const max = totals.reduce((a, b) => Math.max(a, b.y), totals[0].y)
-  const total = totals.find((d) => d.x == options.year).y
+  const total = totals.find((d) => d.x == options.displayYear).y
 
   const sx = {
     group: {
@@ -130,7 +130,7 @@ export default function Visualization({ data, options }) {
           data={totals}
           domain={[2001, 2018]}
           range={[min, max]}
-          selected={{ x: options.year, y: total }}
+          selected={{ x: options.displayYear, y: total }}
           color='red'
         />
       </Box>

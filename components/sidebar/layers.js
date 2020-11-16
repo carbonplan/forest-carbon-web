@@ -1,9 +1,12 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Box, Slider, Badge, Text } from 'theme-ui'
 import { alpha } from '@theme-ui/color'
+import { debounce } from 'lodash'
 import Info from '../info'
 
 function Layers({ options, setOptions, children }) {
+  const [sliderChanging, setSliderChanging] = useState(false)
+
   const sx = {
     group: {
       p: [3],
@@ -120,31 +123,59 @@ function Layers({ options, setOptions, children }) {
         </Text>
         <Slider
           sx={{ mt: [3], mb: [3], width: '314px' }}
-          value={parseFloat(options['year'])}
-          onChange={(e) => setSlider('year', e.target.value)}
+          value={parseFloat(options['displayYear'])}
+          onMouseUp={(e) => {
+            setSlider('year', e.target.value)
+            setSlider('displayYear', e.target.value)
+            setSliderChanging(false)
+          }}
+          onChange={(e) => setSlider('displayYear', e.target.value)}
+          onMouseDown={() => {
+            setSliderChanging(true)
+          }}
           min={2001}
           max={2018}
           step={1}
         />
-        <Text
+        <Box
           sx={{
-            fontFamily: 'monospace',
-            fontSize: [2],
-            display: 'inline-block',
+            textAlign: 'center',
           }}
         >
-          2001
-        </Text>
-        <Text
-          sx={{
-            fontFamily: 'monospace',
-            float: 'right',
-            display: 'inline-block',
-            mr: ['4px'],
-          }}
-        >
-          2018
-        </Text>
+          <Text
+            sx={{
+              fontFamily: 'monospace',
+              fontSize: [2],
+              display: 'inline-block',
+              float: 'left',
+            }}
+          >
+            2001
+          </Text>
+          <Text
+            sx={{
+              fontFamily: 'monospace',
+              display: 'inline-block',
+              ml: 'auto',
+              mr: 'auto',
+              color: 'secondary',
+              opacity: sliderChanging ? 1 : 0,
+              transition: '0.2s',
+            }}
+          >
+            {options.displayYear}
+          </Text>
+          <Text
+            sx={{
+              fontFamily: 'monospace',
+              float: 'right',
+              display: 'inline-block',
+              mr: ['4px'],
+            }}
+          >
+            2018
+          </Text>
+        </Box>
       </Box>
       {children}
     </Box>
