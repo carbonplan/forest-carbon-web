@@ -8,14 +8,7 @@ import Info from '../info'
 import { allOptions, optionKey, optionIndex } from '@constants'
 import * as d3 from 'd3'
 
-function getAverageForYear(points, key) {
-  if (!points.length) return null
-
-  const sum = points.reduce((_sum, point) => _sum + point.properties[key], 0)
-  return sum / points.length
-}
-
-export default function Visualization({ data, options }) {
+export default function Visualization({ data, options, map }) {
   const [mode, setMode] = useState(0)
 
   if (!data) return null
@@ -23,6 +16,19 @@ export default function Visualization({ data, options }) {
   const { region, points } = data
 
   const years = allOptions.years
+
+  const zoomRounded = Math.floor(map.getZoom())
+
+  const scale = {
+    9: 1,
+    8: 1,
+    7: 1,
+    6: 1,
+    5: 1,
+    4: 2.5,
+    3: 6.25,
+    2: 15.65,
+  }
 
   let totals = []
 
@@ -32,7 +38,7 @@ export default function Visualization({ data, options }) {
     })
     let total
     if (subset.length > 0) {
-      total = subset.reduce((a, b) => a + b.properties.e, 0) / subset.length
+      total = (subset.reduce((a, b) => a + b.properties.e, 0) * scale[zoomRounded]) / 1000000
     } else {
       total = 0
     }
@@ -125,7 +131,7 @@ export default function Visualization({ data, options }) {
           <Info margin={'14px'}>Explain emissions</Info>
         </Text>
         <Text sx={{ ...sx.numberLeft, color: 'red' }}>{total.toFixed(2)}</Text>
-        <Text sx={{ ...sx.unit, mb: [3] }}>t / CO2 / ha</Text>
+        <Text sx={{ ...sx.unit, mb: [3] }}>MtCO2</Text>
         <TimeSeries
           data={totals}
           domain={[2001, 2018]}

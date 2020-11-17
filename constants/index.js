@@ -18,7 +18,7 @@ export const optionKey = (options) => {
 }
 
 export const colorRanges = {
-  forests: [5, 100],
+  forests: [5000, 70000],
 }
 
 export const filterTypes = {

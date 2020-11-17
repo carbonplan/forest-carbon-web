@@ -58,7 +58,7 @@ function Viewer() {
         showMethods={showMethods}
         toggleMethods={toggleMethods}
       >
-        <Visualization data={selectedData} options={options} />
+        <Visualization data={selectedData} options={options} map={map}/>
       </Sidebar>
       <Methods showMethods={showMethods} toggleMethods={toggleMethods} />
       <Map options={options} onChangeRegion={setRegion} onMapReady={setMap} />
