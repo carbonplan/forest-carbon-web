@@ -25,7 +25,7 @@ Where `Δ ForestCover` is the fraction of pixels within the given spatial extent
 
 ### Committed emissions (v1) (coming mid-2021)
 
-Work is currently underway to extend our initial accounting model to include more accurate and frequent estimates of biomass and loss attribution under a common data processing framework. For this version — building off of approaches taken by Wulder et al. (2020) and Wang et al. (unpublished) and others — we are building biomass and attribution maps directly from spaceborne lidar (e.g. GLAS, GEDI, ICESAT2) and multispectral imagery (e.g. Landsat, MODIS, Sentinel).
+Work is currently underway to extend our initial accounting model to include more accurate and frequent estimates of biomass and loss attribution under a common data processing framework. For this version — building off of approaches taken by Wulder et al. (2020) and Wang et al. (in review) and others — we are building biomass and attribution maps directly from spaceborne lidar (e.g. GLAS, GEDI, ICESAT2) and multispectral imagery (e.g. Landsat, MODIS, Sentinel).
 
 ## Acknowledgements
 
@@ -43,7 +43,7 @@ Hansen et al. (2013) High-Resolution Global Maps of 21st-Century Forest Cover Ch
 
 Hubau, W., et al. (2020) Asynchronous carbon sink saturation in African and Amazonian tropical forests, Nature, [DOI](10.1038/s41586-020-2035-0)
 
-Wang et al. (unpublished) Disturbance suppresses the aboveground biomass carbon sink in North American boreal forests
+Wang et al. (in review) Disturbance suppresses the aboveground biomass carbon sink in North American boreal forests
 
 Wulder et al. (2020) Biomass status and dynamics over Canada’s forests: Disentangling disturbed area from associated aboveground biomass consequences, Env. Research Letters, [DOI](https://doi.org/10.1088/1748-9326/ab8b11)
 
