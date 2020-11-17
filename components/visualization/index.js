@@ -38,7 +38,9 @@ export default function Visualization({ data, options, map }) {
     })
     let total
     if (subset.length > 0) {
-      total = (subset.reduce((a, b) => a + b.properties.e, 0) * scale[zoomRounded]) / 1000000
+      total =
+        (subset.reduce((a, b) => a + b.properties.e, 0) * scale[zoomRounded]) /
+        1000000
     } else {
       total = 0
     }

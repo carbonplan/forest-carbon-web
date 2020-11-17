@@ -111,15 +111,23 @@ function Layers({ options, setOptions, children }) {
     >
       <Box sx={sx.group}>
         <Text sx={sx.label}>
-          Emissions
-          <Info>Explanation of forest-based emissions.</Info>
+          Committed emissions
+          <Info>
+            Annual estimates of committed emissions based on biomass loss.
+            Emissions reflect an unknown combination of several drivers, including
+            fires, insects, drought, harvest, and conversion. Based on data
+            from Baccini et al. (2012) and Hansen et al. (2013).
+          </Info>
         </Text>
         <Option value='forests' color='red' />
       </Box>
       <Box sx={sx.group}>
         <Text sx={sx.label}>
           Time
-          <Info margin={'22px'}>We analyze data from 2001 to 2018.</Info>
+          <Info margin={'22px'}>
+            Data have been processed for years 2001 through 2018.
+            Drag the slider to update the map for the selected year.
+          </Info>
         </Text>
         <Slider
           sx={{ mt: [3], mb: [3], width: '314px' }}
