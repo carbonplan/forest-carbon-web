@@ -133,7 +133,7 @@ export default function Visualization({ data, options, map }) {
           <Info margin={'14px'}>Explain emissions</Info>
         </Text>
         <Text sx={{ ...sx.numberLeft, color: 'red' }}>{total.toFixed(2)}</Text>
-        <Text sx={{ ...sx.unit, mb: [3] }}>MtCO2</Text>
+        <Text sx={{ ...sx.unit, mb: [3] }}>MtCO₂</Text>
         <TimeSeries
           data={totals}
           domain={[2001, 2018]}
