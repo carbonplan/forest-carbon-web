@@ -114,9 +114,9 @@ function Layers({ options, setOptions, children }) {
           Committed emissions
           <Info>
             Annual estimates of committed emissions based on biomass loss.
-            Emissions reflect an unknown combination of several drivers, including
-            fires, insects, drought, harvest, and conversion. Based on data
-            from Baccini et al. (2012) and Hansen et al. (2013).
+            Emissions reflect an unknown combination of several drivers,
+            including fires, insects, drought, harvest, and conversion. Based on
+            data from Baccini et al. (2012) and Hansen et al. (2013).
           </Info>
         </Text>
         <Option value='forests' color='red' />
@@ -125,8 +125,8 @@ function Layers({ options, setOptions, children }) {
         <Text sx={sx.label}>
           Time
           <Info margin={'22px'}>
-            Data have been processed for years 2001 through 2018.
-            Drag the slider to update the map for the selected year.
+            Data have been processed for years 2001 through 2018. Drag the
+            slider to update the map for the selected year.
           </Info>
         </Text>
         <Slider
