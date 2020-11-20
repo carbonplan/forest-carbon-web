@@ -49,6 +49,4 @@ Wulder et al. (2020) Biomass status and dynamics over Canada’s forests: Disent
 
 Zarin et al. (2016) Can carbon emissions from tropical deforestation drop by 50% in 5 years? Global Change Biology, [DOI](https://doi.org/10.1111/gcb.13153)
 
-export default ({ children }) => <Box>{children}</Box
-
->
+export default ({ children }) => <Box>{children}</Box>
