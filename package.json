@@ -33,7 +33,7 @@
     "@carbonplan/theme": "^1.1.0",
     "@mdx-js/loader": "^1.6.22",
     "@next/bundle-analyzer": "^10.0.5",
-    "@next/mdx": "^10.0.5",
+    "@next/mdx": "^10.0.8",
     "@theme-ui/color": "^0.3.5",
     "@turf/turf": "^6.3.0",
     "d3": "^6.5.0",
