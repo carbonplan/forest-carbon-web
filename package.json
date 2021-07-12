@@ -30,7 +30,7 @@
   "homepage": "https://github.com/carbonplan/maps#readme",
   "dependencies": {
     "@carbonplan/components": "^1.0.0",
-    "@carbonplan/theme": "^1.1.0",
+    "@carbonplan/theme": "^6.0.1",
     "@mdx-js/loader": "^1.6.22",
     "@next/bundle-analyzer": "^11.0.1",
     "@next/mdx": "^11.0.1",
