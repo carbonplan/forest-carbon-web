@@ -41,7 +41,7 @@
     "geojson-dissolve": "^3.1.0",
     "lodash": "^4.17.21",
     "mapbox-gl": "^1.13.1",
-    "next": "^10.2.3",
+    "next": "^11.1.1",
     "point-in-polygon": "^1.1.0",
     "polished": "^4.1.0",
     "react": "^16.14.0",
