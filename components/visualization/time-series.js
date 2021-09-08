@@ -111,7 +111,9 @@ export default function TimeSeries({ data, domain, range, selected, color }) {
       )
 
     return function cleanup() {
-      boxRef.current.innerHTML = ''
+      if (boxRef.current) {
+        boxRef.current.innerHTML = ''
+      }
     }
   }, [data, theme])
 
