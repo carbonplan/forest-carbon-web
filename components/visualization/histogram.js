@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import * as d3 from 'd3'
 import { jsx } from 'theme-ui'
 

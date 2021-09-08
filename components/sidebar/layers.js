@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Box, Slider, Badge, Text } from 'theme-ui'
-import { alpha } from '@theme-ui/color'
-import { debounce } from 'lodash'
+import { Box, Slider, Text } from 'theme-ui'
+import { Tag } from '@carbonplan/components'
 import Info from '../info'
 
 function Layers({ options, setOptions, children }) {
@@ -54,12 +53,6 @@ function Layers({ options, setOptions, children }) {
     })
   }
 
-  function toggleRadio(name, value) {
-    setOptions((options) => {
-      return { ...options, [name]: value }
-    })
-  }
-
   function setSlider(name, value) {
     setOptions((options) => {
       return { ...options, [name]: value }
@@ -68,37 +61,18 @@ function Layers({ options, setOptions, children }) {
 
   const Option = ({ value, color, disabled }) => {
     return (
-      <Badge
+      <Tag
         variant='primary'
         onClick={() => toggleOption(value)}
+        value={!disabled}
         sx={{
+          display: 'block',
+          color,
           mr: [3],
-          color: options[value] & !disabled ? color : alpha(color, 0.2),
-          borderColor: options[value] & !disabled ? color : alpha(color, 0.2),
-          cursor: disabled ? 'default' : 'pointer',
         }}
       >
         {value}
-      </Badge>
-    )
-  }
-
-  const Radio = ({ name, value, color, disabled }) => {
-    return (
-      <Badge
-        variant='primary'
-        onClick={() => toggleRadio(name, value)}
-        sx={{
-          mr: [3],
-          color:
-            (options[name] == value) & !disabled ? color : alpha(color, 0.2),
-          borderColor:
-            (options[name] == value) & !disabled ? color : alpha(color, 0.2),
-          cursor: disabled ? 'default' : 'pointer',
-        }}
-      >
-        {value}
-      </Badge>
+      </Tag>
     )
   }
 

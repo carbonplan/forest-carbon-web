@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { jsx, IconButton } from 'theme-ui'
 
 const Button = ({ svg, onClick, sx, active, label }) => (

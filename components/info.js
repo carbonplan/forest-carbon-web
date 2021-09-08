@@ -1,11 +1,8 @@
-/** @jsx jsx */
 import { useState } from 'react'
-import { jsx, Text, IconButton, useThemeUI } from 'theme-ui'
+import { Box, IconButton } from 'theme-ui'
+import AnimateHeight from 'react-animate-height'
 
 const Info = ({ children }) => {
-  const context = useThemeUI()
-  const theme = context.theme
-
   const [expanded, setExpanded] = useState(false)
   const toggle = (e) => {
     setExpanded(!expanded)
@@ -13,12 +10,13 @@ const Info = ({ children }) => {
 
   const sx = {
     body: {
-      ontFamily: 'body',
+      fontFamily: 'body',
       letterSpacing: 'body',
       textTransform: 'none',
       fontFamily: 'body',
-      fontSize: [1],
-      mt: [2],
+      fontSize: [1, 1, 1, 2],
+      maxWidth: '100%',
+      pb: [2],
     },
   }
 
@@ -30,16 +28,19 @@ const Info = ({ children }) => {
         sx={{
           cursor: 'pointer',
           display: 'inline-block',
-          position: 'absolute',
-          right: 10,
+          float: 'right',
+          mr: '-10px',
           mt: '-6px',
-          '&:hover > #icon': {
-            stroke: 'text',
+          '@media (hover: hover) and (pointer: fine)': {
+            '&:hover > #icon': {
+              stroke: 'text',
+            },
           },
           p: [0],
         }}
       >
-        <svg
+        <Box
+          as='svg'
           height={'18px'}
           width={'18px'}
           stroke='none'
@@ -53,14 +54,20 @@ const Info = ({ children }) => {
             transition: '0.1s',
           }}
         >
-          <>
-            <line x1='13' y1='12.3' x2='13' y2='19.5' />
-            <line x1='13' y1='7.9' x2='13' y2='10.1' />
-            <circle cx='13' cy='13' r='12' />
-          </>
-        </svg>
+          <line x1='13' y1='12.3' x2='13' y2='19.5' />
+          <line x1='13' y1='7.9' x2='13' y2='10.1' />
+          <circle cx='13' cy='13' r='12' />
+        </Box>
       </IconButton>
-      {expanded && <Text sx={sx.body}>{children}</Text>}
+      <Box sx={{ pt: [2], mb: [-2] }}>
+        <AnimateHeight
+          duration={100}
+          height={expanded ? 'auto' : 0}
+          easing={'linear'}
+        >
+          <Box sx={sx.body}>{children}</Box>
+        </AnimateHeight>
+      </Box>
     </>
   )
 }

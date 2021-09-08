@@ -1,6 +1,5 @@
 import Seo from './seo'
-import Switch from './switch'
-import { Container, Flex, Box, Text } from 'theme-ui'
+import { Flex, Box } from 'theme-ui'
 
 const Layout = ({ children }) => {
   return (

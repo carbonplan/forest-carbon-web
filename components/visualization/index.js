@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { useState } from 'react'
 import { jsx, Box, Text, Grid } from 'theme-ui'
 import TimeSeries from './time-series'
@@ -6,7 +5,6 @@ import Donut from './donut'
 import Histogram from './histogram'
 import Info from '../info'
 import { allOptions, optionKey, optionIndex } from '@constants'
-import * as d3 from 'd3'
 
 export default function Visualization({ data, options, map }) {
   const [mode, setMode] = useState(0)

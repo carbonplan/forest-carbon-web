@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { useState, useEffect } from 'react'
 import * as d3 from 'd3'
 import { jsx, IconButton, useThemeUI } from 'theme-ui'
@@ -200,7 +199,11 @@ export const RulerButton = ({ map }) => {
   useRuler(map, mode)
 
   return (
-    <IconButton aria-label='Switch ruler mode' onClick={switchMode}>
+    <IconButton
+      aria-label='Switch ruler mode'
+      onClick={switchMode}
+      sx={{ stroke: 'primary' }}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 24'
