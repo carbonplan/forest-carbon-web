@@ -6,7 +6,6 @@ const resolve = (p) => path.resolve(__dirname, p)
 
 const aliases = {
   '@components': resolve('./components'),
-  '@config': resolve('./config'),
   '@constants': resolve('./constants'),
   '@utils': resolve('./utils'),
 }

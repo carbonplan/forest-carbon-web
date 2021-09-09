@@ -30,10 +30,6 @@ npm run dev
 
 and then visit `http://localhost:1000` in your browser.
 
-## map tiles
-
-To render the map itself, you need to either build the map tiles locally (so they can be served from the `tile` folder) or update `config.js` to point to the remote versions stored on Google Storage.
-
 ## license
 
 All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed, but we request that you please provide attribution if reusing any of our digital content (graphics, logo, articles, etc.).

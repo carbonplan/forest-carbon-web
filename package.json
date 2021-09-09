@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/carbonplan/maps#readme",
   "dependencies": {
+    "@carbonplan/colormaps": "^1.0.0",
     "@carbonplan/components": "^10.0.0",
     "@carbonplan/maps": "1.0.0-alpha.3",
     "@carbonplan/theme": "^7.0.0",

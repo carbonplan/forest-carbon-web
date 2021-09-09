@@ -1,57 +1,42 @@
-import { useEffect, useState, useRef } from 'react'
-import { Box } from 'theme-ui'
+import { Box, useThemeUI } from 'theme-ui'
 import mapboxgl from 'mapbox-gl'
 import style from './style'
 import Enhancers from './enhancers'
+import Basemap from './basemap'
+import { Canvas, Raster } from '@carbonplan/maps'
+import { useColormap } from '@carbonplan/colormaps'
 
 mapboxgl.accessToken = ''
 
-function Map({ onMapReady, options, onChangeRegion = (region) => {} }) {
-  const container = useRef(null)
-  const [map, setMap] = useState(null)
-
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: container.current,
-      style: style,
-      center: [-121.9, 43.11],
-      zoom: 6.79,
-      minZoom: 2,
-      maxZoom: 9,
-      maxBounds: [
-        [-141, -50],
-        [-25, 60],
-      ],
-    })
-
-    map.on('load', () => {
-      setMap(map)
-      onMapReady(map)
-    })
-
-    return function cleanup() {
-      setMap(null)
-      map.remove()
-    }
-  }, [])
+function Map() {
+  const { theme } = useThemeUI()
+  const colormap = useColormap('reds')
 
   return (
     <Box
-      ref={container}
       sx={{
         flexBasis: '100%',
-        'canvas.mapboxgl-canvas:focus': {
-          outline: 'none',
-        },
       }}
     >
-      {map && (
-        <Enhancers
-          map={map}
-          options={options}
-          onChangeRegion={onChangeRegion}
+      <Canvas style={style} zoom={2} center={[0, 0]} debug={false}>
+        <Basemap />
+        <Raster
+          minZoom={5}
+          maxZoom={5}
+          size={128}
+          colormap={colormap}
+          clim={[0, 100]}
+          display={true}
+          opacity={1}
+          mode={'dotgrid'}
+          nan={-3.4e38}
+          source={
+            // 'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/junk/v0_emissions_pyramids.zarr/{z}/emissions'
+            'https://carbonplan.blob.core.windows.net/carbonplan-scratch/zarr-mapbox-webgl/128/{z}'
+          }
         />
-      )}
+        <Enhancers />
+      </Canvas>
     </Box>
   )
 }

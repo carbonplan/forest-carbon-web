@@ -5,7 +5,6 @@ import Map from './map'
 import Visualization from './visualization'
 import Methods from './methods'
 import { filterTypes } from '@constants'
-import { getSelectedData } from './map/enhancers/filters/helpers'
 
 function Viewer() {
   const initialOptions = {
@@ -23,7 +22,8 @@ function Viewer() {
 
   useEffect(() => {
     if (!map) return
-    const data = getSelectedData(map, ['forests'], region)
+    // todo: actually grab region data once available
+    const data = null
     setSelectedData(data)
   }, [map, region, bounds])
 

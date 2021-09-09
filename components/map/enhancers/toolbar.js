@@ -1,7 +1,7 @@
 import { Box } from 'theme-ui'
 import { useState, useRef } from 'react'
 
-export default function Toolbar({ map, children, position }) {
+export default function Toolbar({ children, position }) {
   const toolbar = useRef(null)
 
   const [edge, setEdge] = useState(0)
