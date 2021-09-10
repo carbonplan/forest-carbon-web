@@ -6,33 +6,11 @@ import { Canvas, Raster } from '@carbonplan/maps'
 import { useColormap } from '@carbonplan/colormaps'
 import { allOptions } from '@constants'
 
-const toShaderVariable = (v) => `_${v}`
-
 function Map({ options }) {
   const { theme } = useThemeUI()
   const colormap = useColormap('reds')
 
-  const renderedOptions = allOptions.years.slice(0, 15)
-  const shaderVariables = renderedOptions.map(toShaderVariable)
-
-  const uniforms = renderedOptions.reduce((accum, v) => {
-    accum[`${toShaderVariable(v)}Layer`] = options.year === v ? 1 : 0
-    return accum
-  }, {})
-
-  const valueDefinition = `
-  float value;
-  ${shaderVariables
-    .map(
-      (v) => `
-  if (${v}Layer == 1.0) {
-    value = ${v};
-  }
-  `
-    )
-    .join('')}
-  `
-
+  const year = allOptions.years.indexOf(options.year)
   return (
     <Box
       sx={{
@@ -51,13 +29,11 @@ function Map({ options }) {
           opacity={1}
           mode={'dotgrid'}
           nan={-3.4e38}
-          variables={shaderVariables}
-          uniforms={uniforms}
+          activeIndex={[year]}
           source={
             'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/junk/v0_emissions_pyramids.zarr/{z}/emissions'
           }
           frag={`
-          ${valueDefinition}
           if (length(gl_PointCoord.xy - 0.5) > 0.5) {
             discard;
           }
