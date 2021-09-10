@@ -33,6 +33,19 @@ module.exports = withMDX(
         ...aliases,
       }
 
+      config.resolve.alias['react'] = path.resolve(
+        __dirname,
+        '.',
+        'node_modules',
+        'react'
+      )
+      config.resolve.alias['theme-ui'] = path.resolve(
+        __dirname,
+        '.',
+        'node_modules',
+        'theme-ui'
+      )
+
       return config
     },
   })

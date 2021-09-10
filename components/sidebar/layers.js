@@ -105,13 +105,11 @@ function Layers({ options, setOptions, children }) {
         </Text>
         <Slider
           sx={{ mt: [3], mb: [3], width: '314px' }}
-          value={parseFloat(options['displayYear'])}
-          onMouseUp={(e) => {
-            setSlider('year', e.target.value)
-            setSlider('displayYear', e.target.value)
+          value={parseFloat(options['year'])}
+          onMouseUp={() => {
             setSliderChanging(false)
           }}
-          onChange={(e) => setSlider('displayYear', e.target.value)}
+          onChange={(e) => setSlider('year', e.target.value)}
           onMouseDown={() => {
             setSliderChanging(true)
           }}
@@ -145,7 +143,7 @@ function Layers({ options, setOptions, children }) {
               transition: '0.2s',
             }}
           >
-            {options.displayYear}
+            {options.year}
           </Text>
           <Text
             sx={{

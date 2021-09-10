@@ -1,6 +1,6 @@
 export const allOptions = {
   scenarios: ['SSP2-4.5', 'SSP3-7.0', 'SSP5-8.5'],
-  years: Array(18)
+  years: Array(20)
     .fill(0)
     .map((_, i) => (i + 2001).toString()),
 }

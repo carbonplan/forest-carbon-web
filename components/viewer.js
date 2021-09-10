@@ -10,7 +10,6 @@ function Viewer() {
   const initialOptions = {
     forests: true,
     year: '2001',
-    displayYear: '2001',
   }
 
   const [map, setMap] = useState(null)
