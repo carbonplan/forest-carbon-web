@@ -5,12 +5,15 @@ import '@carbonplan/components/fonts.css'
 import '@carbonplan/components/globals.css'
 import '@carbonplan/maps/mapbox.css'
 import theme from '@carbonplan/theme'
+import { RegionProvider } from '../components/region'
 
 const App = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <MDXProvider>
-        <Component {...pageProps} />
+        <RegionProvider>
+          <Component {...pageProps} />
+        </RegionProvider>
       </MDXProvider>
     </ThemeProvider>
   )
