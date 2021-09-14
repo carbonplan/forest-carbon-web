@@ -10,6 +10,7 @@ import Layers from '../components/options/layers'
 import Years from '../components/options/years'
 import Map from '../components/map'
 import Methods from '../components/methods'
+import RegionalEmissions from '../components/regional-emissions'
 
 const sx = {
   heading: {
@@ -68,7 +69,9 @@ function Index() {
                 <ControlPanelDivider />
                 <Years year={year} setYear={setYear} sx={sx} />
                 <ControlPanelDivider />
-                <RegionDataDisplay sx={sx} />
+                <RegionDataDisplay sx={sx}>
+                  <RegionalEmissions year={year} />
+                </RegionDataDisplay>
               </Group>
             </ControlPanel>
           </Container>
