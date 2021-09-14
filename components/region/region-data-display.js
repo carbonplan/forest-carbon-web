@@ -2,6 +2,7 @@ import { Box } from 'theme-ui'
 import { Expander } from '@carbonplan/components'
 import AnimateHeight from 'react-animate-height'
 
+import { RecenterButton } from './recenter-button'
 import { useRegionContext } from './context'
 
 export const RegionDataDisplay = ({ sx }) => {
@@ -16,7 +17,24 @@ export const RegionDataDisplay = ({ sx }) => {
       const sum = regionData.value.value
         .filter((d) => !Number.isNaN(d))
         .reduce((a, d) => a + d, 0)
-      content = `total: ${sum.toFixed(2)}`
+      content = (
+        <>
+          <Box
+            as='span'
+            sx={{
+              fontFamily: 'faux',
+              letterSpacing: 'faux',
+              color: 'secondary',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Box sx={{ mb: [1] }}>Recenter map</Box>
+            <RecenterButton color='secondary' />
+          </Box>
+          total: {sum.toFixed(2)}
+        </>
+      )
     }
   }
 
