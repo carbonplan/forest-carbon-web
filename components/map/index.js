@@ -7,10 +7,32 @@ import { useColormap } from '@carbonplan/colormaps'
 import { allOptions } from '@constants'
 import { useRegionContext } from '../region'
 
+const toShaderVariable = (v) => `_${v}`
+
 function Map({ children, year }) {
   const { theme } = useThemeUI()
   const { setRegionData, showRegionPicker } = useRegionContext()
 
+  const renderedOptions = allOptions.years.slice(0, 15)
+  const shaderVariables = renderedOptions.map(toShaderVariable)
+
+  const uniforms = renderedOptions.reduce((accum, v) => {
+    accum[`${toShaderVariable(v)}Layer`] = year === v ? 1 : 0
+    return accum
+  }, {})
+
+  const valueDefinition = `
+  float value;
+  ${shaderVariables
+    .map(
+      (v) => `
+  if (${v}Layer == 1.0) {
+    value = ${v};
+  }
+  `
+    )
+    .join('')}
+  `
   const colormap = useColormap('reds')
 
   const yearIdx = allOptions.years.indexOf(year)
@@ -39,7 +61,10 @@ function Map({ children, year }) {
         source={
           'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/junk/v0_emissions_pyramids.zarr/{z}/emissions'
         }
+        variables={shaderVariables}
+        uniforms={uniforms}
         frag={`
+          ${valueDefinition}
           if (length(gl_PointCoord.xy - 0.5) > 0.5) {
             discard;
           }
