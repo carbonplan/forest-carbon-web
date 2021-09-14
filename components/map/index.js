@@ -24,11 +24,11 @@ function Map({ options }) {
           ndim={3}
           size={128}
           colormap={colormap}
-          clim={[0, 100]}
+          clim={[0, 5000]}
           display={true}
           opacity={1}
           mode={'dotgrid'}
-          nan={-3.4e38}
+          nan={3.4028234663852886e38}
           activeIndex={[year]}
           source={
             'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/junk/v0_emissions_pyramids.zarr/{z}/emissions'
@@ -38,7 +38,7 @@ function Map({ options }) {
             discard;
           }
 
-          if (value == 0.0) {
+          if (value == nan) {
             discard;
           }
 
