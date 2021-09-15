@@ -33,7 +33,7 @@ function Map({ children, year }) {
     )
     .join('')}
   `
-  const colormap = useColormap('reds')
+  const colormap = useColormap('fire')
 
   const yearIdx = allOptions.years.indexOf(year)
   return (
