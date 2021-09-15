@@ -28,13 +28,8 @@ export const RegionDataDisplay = ({ children, sx }) => {
           id='label'
           sx={{ color: 'primary', transition: 'color 0.15s' }}
         >
-          Regional emissions
+          Inspect region
         </Box>
-        <Expander
-          value={showRegionPicker}
-          id='expander'
-          sx={{ position: 'relative' }}
-        />
       </Box>
 
       <AnimateHeight

@@ -4,7 +4,7 @@ import { Row, Column } from '@carbonplan/components'
 
 import { useRegionContext } from './region'
 
-const ControlPanel = ({ children, title }) => {
+const ControlPanel = ({ children, title, description }) => {
   const [expanded, setExpanded] = useState(false)
   const { showRegionPicker, setShowRegionPicker } = useRegionContext()
 
@@ -89,8 +89,8 @@ const ControlPanel = ({ children, title }) => {
           <Box
             sx={{
               px: [4, 5, 5, 6],
-              pb: [5],
-              pt: [5],
+              pb: [4],
+              pt: [4],
               pointerEvents: 'all',
               bg: 'background',
               overflowY: 'scroll',
@@ -112,16 +112,16 @@ const ControlPanel = ({ children, title }) => {
           </Box>
         </Box>
       </Column>
-      <Column start={[3, 5, 8, 8]} width={3}>
+      <Column start={[3, 5, 7, 7]} width={[4, 4, 5, 5]}>
         <Box
           sx={{
-            mt: [8],
+            mt: [9],
             opacity: expanded ? 0 : 1,
             transition: 'opacity 0.3s',
             position: 'relative',
             display: 'block',
             zIndex: 1001,
-            fontSize: [6, 7, 8, 9],
+            fontSize: [6, 7, 7, 8],
             letterSpacing: 'heading',
             fontFamily: 'heading',
             lineHeight: 'heading',
@@ -129,6 +129,20 @@ const ControlPanel = ({ children, title }) => {
           }}
         >
           {title}
+        </Box>
+        <Box
+          sx={{
+            mt: [3],
+            opacity: expanded ? 0 : 1,
+            transition: 'opacity 0.3s',
+            position: 'relative',
+            display: 'block',
+            zIndex: 1001,
+            fontSize: [3, 3, 3, 4],
+            pointerEvents: 'none',
+          }}
+          >
+        {description}
         </Box>
       </Column>
     </Row>

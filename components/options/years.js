@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Box, Slider, Text } from 'theme-ui'
-import { Row, Column, Tag } from '@carbonplan/components'
+import { Box } from 'theme-ui'
+import { Row, Column, Tag, Slider } from '@carbonplan/components'
 import Info from '../info'
 
 function Years({ year, setYear, sx }) {
@@ -9,13 +9,13 @@ function Years({ year, setYear, sx }) {
   return (
     <Row columns={3}>
       <Column start={1} width={3}>
-        <Text sx={sx.heading}>
+        <Box sx={sx.heading}>
           Time
           <Info margin={'22px'}>
-            Data have been processed for years 2001 through 2018. Drag the
+            Data have been processed for years 2001 through 2020. Drag the
             slider to update the map for the selected year.
           </Info>
-        </Text>
+        </Box>
         <Slider
           sx={{ mt: [3], mb: [3] }}
           value={parseFloat(year)}
@@ -35,39 +35,43 @@ function Years({ year, setYear, sx }) {
             textAlign: 'center',
           }}
         >
-          <Text
+          <Box
             sx={{
-              fontFamily: 'monospace',
-              fontSize: [2],
+              fontFamily: 'mono',
+              letterSpacing: 'mono',
+              fontSize: [1],
               display: 'inline-block',
               float: 'left',
             }}
           >
             2001
-          </Text>
-          <Text
+          </Box>
+          <Box
             sx={{
-              fontFamily: 'monospace',
+              fontFamily: 'mono',
+              letterSpacing: 'mono',
               display: 'inline-block',
               ml: 'auto',
               mr: 'auto',
               color: 'secondary',
               opacity: sliderChanging ? 1 : 0,
               transition: '0.2s',
+              fontSize: [1],
             }}
           >
             {year}
-          </Text>
-          <Text
+          </Box>
+          <Box
             sx={{
-              fontFamily: 'monospace',
+              fontFamily: 'mono',
+              letterSpacing: 'mono',
+              fontSize: [1],
               float: 'right',
               display: 'inline-block',
-              mr: ['4px'],
             }}
           >
             2020
-          </Text>
+          </Box>
         </Box>
       </Column>
     </Row>
