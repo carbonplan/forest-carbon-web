@@ -1,8 +1,15 @@
 import { IconButton } from 'theme-ui'
+import { useRecenterRegion } from '@carbonplan/maps'
 
-const ResetButton = ({ onClick }) => {
+export const RecenterButton = ({ color = 'primary', sx }) => {
+  const { recenterRegion } = useRecenterRegion()
+
   return (
-    <IconButton aria-label='Recenter map' onClick={onClick}>
+    <IconButton
+      aria-label='Recenter map'
+      onClick={recenterRegion}
+      sx={{ ...sx, stroke: color, cursor: 'pointer' }}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 24'
@@ -18,4 +25,4 @@ const ResetButton = ({ onClick }) => {
   )
 }
 
-export default ResetButton
+export default RecenterButton

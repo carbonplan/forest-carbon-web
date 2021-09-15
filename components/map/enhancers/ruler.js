@@ -1,8 +1,7 @@
-/** @jsx jsx */
 import { useState, useEffect } from 'react'
 import * as d3 from 'd3'
 import { jsx, IconButton, useThemeUI } from 'theme-ui'
-
+import { useMapbox } from '@carbonplan/maps'
 // ruler modes
 const OFF = 0 // show nothing
 const AXES = 1 // show axes only
@@ -183,7 +182,8 @@ function useRuler(map, mode = AXES) {
   }, [mode, theme])
 }
 
-export const RulerButton = ({ map }) => {
+export const RulerButton = () => {
+  const { map } = useMapbox()
   const [mode, setMode] = useState(AXES)
 
   const switchMode = () => {
@@ -200,7 +200,11 @@ export const RulerButton = ({ map }) => {
   useRuler(map, mode)
 
   return (
-    <IconButton aria-label='Switch ruler mode' onClick={switchMode}>
+    <IconButton
+      aria-label='Switch ruler mode'
+      onClick={switchMode}
+      sx={{ stroke: 'primary' }}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 24 24'

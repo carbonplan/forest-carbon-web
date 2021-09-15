@@ -6,7 +6,6 @@ const resolve = (p) => path.resolve(__dirname, p)
 
 const aliases = {
   '@components': resolve('./components'),
-  '@config': resolve('./config'),
   '@constants': resolve('./constants'),
   '@utils': resolve('./utils'),
 }
@@ -33,6 +32,19 @@ module.exports = withMDX(
         ...config.resolve.alias,
         ...aliases,
       }
+
+      config.resolve.alias['react'] = path.resolve(
+        __dirname,
+        '.',
+        'node_modules',
+        'react'
+      )
+      config.resolve.alias['theme-ui'] = path.resolve(
+        __dirname,
+        '.',
+        'node_modules',
+        'theme-ui'
+      )
 
       return config
     },
