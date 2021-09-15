@@ -3,11 +3,17 @@ import { Row, Column } from '@carbonplan/components'
 import { Chart, Grid, Plot, Line, TickLabels, Circle } from '@carbonplan/charts'
 import { Box, Flex } from 'theme-ui'
 
+import { useRegion } from '@carbonplan/maps'
 import { RecenterButton, useRegionContext } from './region'
 
 export const RegionalEmissions = ({ year, color = 'red' }) => {
   const { regionData } = useRegionContext()
+  const { region } = useRegion()
   const data = regionData?.value || {}
+
+  const radius = region?.properties?.radius || 0
+  // regional area in km2
+  const regionArea = Math.PI * radius * radius
 
   const chartData = useMemo(() => {
     let lineData = []
@@ -16,15 +22,12 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
       const yearData = data[yearKey]
       const year = Number(yearKey.replace(/\D/g, ''))
       const filteredData = yearData.filter((d) => !Number.isNaN(d))
-      if (filteredData.length > 0) {
-        const average =
-          filteredData.reduce((a, d) => a + d, 0) / filteredData.length
-        lineData.push([year, average])
-      }
+      const sum = filteredData.reduce((a, d) => a + d, 0)
+      lineData.push([year, sum * regionArea])
     }
 
     return lineData
-  }, [data])
+  }, [data, regionArea])
 
   if (!regionData || regionData.loading) {
     return 'loading...'
@@ -51,7 +54,7 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
               ml: [0],
             }}
           >
-            {validYearData ? yearData[1].toFixed(2) : 'n/a'}
+            {validYearData ? (yearData[1] / 1000000).toFixed(2) + 'M' : 'n/a'}
           </Box>{' '}
           <Box
             sx={{
@@ -64,7 +67,7 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
               ml: [2],
             }}
           >
-            MtCO₂
+            tCO₂/km²
           </Box>
         </Box>
         <Box

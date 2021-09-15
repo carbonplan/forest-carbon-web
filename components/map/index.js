@@ -59,7 +59,7 @@ function Map({ children, year }) {
         nan={3.4028234663852886e38}
         activeIndex={[yearIdx]}
         source={
-          'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/junk/v0_emissions_pyramids.zarr/{z}/emissions'
+          'https://carbonplan-scratch.s3.us-west-2.amazonaws.com/v0.4/map/emissions_pyramid2.zarr/{z}/emissions'
         }
         variables={shaderVariables}
         uniforms={uniforms}
