@@ -36,7 +36,7 @@ function Index() {
   const [expanded, setExpanded] = useState(false)
 
   const index = useBreakpointIndex()
-
+  const isMobile = index === 0
   return (
     <>
       <Meta />
@@ -44,12 +44,35 @@ function Index() {
         <Guide color='teal' />
       </Container>
       <Box sx={{ position: 'absolute', top: 0, width: '100%', zIndex: 5000 }}>
-        <Container>
-          <Header
-            dimmer={'none'}
-            settings={{ expanded, onClick: () => setExpanded((prev) => !prev) }}
-          />
-        </Container>
+        <Box
+          as='header'
+          sx={
+            isMobile
+              ? {
+                  width: '100%',
+                  borderStyle: 'solid',
+                  borderColor: 'muted',
+                  borderWidth: '0px',
+                  borderBottomWidth: '1px',
+                  position: 'sticky',
+                  top: 0,
+                  bg: 'background',
+                  height: '56px',
+                  zIndex: 2000,
+                }
+              : {}
+          }
+        >
+          <Container>
+            <Header
+              dimmer={'none'}
+              settings={{
+                expanded,
+                onClick: () => setExpanded((prev) => !prev),
+              }}
+            />
+          </Container>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -104,8 +127,8 @@ function Index() {
                 <Layers layers={layers} setLayers={setLayers} sx={sx} />
                 <ControlPanelDivider />
                 <Years year={year} setYear={setYear} sx={sx} />
-                {index > 0 && <ControlPanelDivider />}
-                {index > 0 && (
+                {!isMobile && <ControlPanelDivider />}
+                {!isMobile && (
                   <RegionDataDisplay sx={sx}>
                     <RegionalEmissions year={year} />
                   </RegionDataDisplay>
