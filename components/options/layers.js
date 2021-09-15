@@ -19,7 +19,7 @@ function Layers({ layers, setLayers, sx }) {
           values={layers}
           setValues={setLayers}
           colors={{ emissions: 'orange' }}
-          sx={{ mt: [3] }}
+          sx={{ mt: [2] }}
         />
       </Column>
     </Row>

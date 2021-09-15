@@ -28,7 +28,7 @@ const areaOfPixel = (pixelSize, centerLat) => {
   return ((pixelSize / 360) * (areaList[0] - areaList[1])) / (1000 * 1000) // to km2
 }
 
-export const RegionalEmissions = ({ year, color = 'red' }) => {
+export const RegionalEmissions = ({ year, color = 'orange' }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
   const data = regionData?.value
@@ -67,13 +67,15 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
 
   return (
     <>
-      <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <Flex
+        sx={{ pt: [3], flexDirection: 'row', justifyContent: 'space-between' }}
+      >
         <Box>
           <Box
             sx={{
-              color: 'red',
-              fontFamily: 'monospace',
-              letterSpacing: 'monospace',
+              color: 'orange',
+              fontFamily: 'mono',
+              letterSpacing: 'mono',
               fontSize: [4],
               display: 'inline-block',
               ml: [0],
@@ -95,30 +97,14 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
             tCO₂
           </Box>
         </Box>
-        <Box
-          as='span'
-          sx={{
-            fontFamily: 'faux',
-            letterSpacing: 'faux',
-            color: 'secondary',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            fontSize: [0],
-          }}
-        >
-          <Box>Recenter map</Box>
-          <RecenterButton color='secondary' />
-        </Box>
       </Flex>
       <Row columns={3}>
         <Column start={1} width={3}>
           {chartData.length > 0 && (
-            <Box sx={{ width: '100%', height: '200px' }}>
-              <Chart x={[2001, 2020]} y={range} padding={{ top: 50, left: 0 }}>
-                <Grid values={[range[0]]} horizontal />
-                <TickLabels values={[2001, 2020]} bottom />
-
+            <Box sx={{ width: '100%', height: '170px' }}>
+              <Chart x={[2001, 2020]} y={range} padding={{ top: 10, left: 0 }}>
+                <Grid values={[2005, 2010, 2015, 2020]} vertical />
+                <TickLabels values={[2005, 2010, 2015, 2020]} bottom />
                 <Plot>
                   {validYearData && (
                     <Circle

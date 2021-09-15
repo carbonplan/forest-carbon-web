@@ -60,13 +60,8 @@ function Index() {
               description={
                 <span>
                   Read our{' '}
-                  <Link
-                    sx={{ pointerEvents: 'all' }}
-                    href='/blog/climate-trace-release'
-                  >
-                    blog post
-                  </Link>
-                  , play with the <Link onClick={() => {}}>map</Link>
+                  <Link href='/blog/climate-trace-release'>blog post</Link>,
+                  play with the <Link onClick={() => {}}>map</Link>
                 </span>
               }
             >

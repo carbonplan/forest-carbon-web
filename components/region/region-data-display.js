@@ -1,7 +1,9 @@
 import { Box } from 'theme-ui'
 import { Expander } from '@carbonplan/components'
+import { X } from '@carbonplan/icons'
 import AnimateHeight from 'react-animate-height'
 
+import Search from '../icons/search'
 import { useRegionContext } from './context'
 
 export const RegionDataDisplay = ({ children, sx }) => {
@@ -14,10 +16,10 @@ export const RegionDataDisplay = ({ children, sx }) => {
         sx={{
           ...sx.heading,
           display: 'flex',
-          justifyContent: 'space-between',
           cursor: 'pointer',
+          width: 'fit-content',
           '@media (hover: hover) and (pointer: fine)': {
-            '&:hover > #expander': { stroke: 'secondary' },
+            '&:hover > #icon': { stroke: 'secondary' },
             '&:hover > #label': { color: 'secondary' },
           },
         }}
@@ -30,6 +32,31 @@ export const RegionDataDisplay = ({ children, sx }) => {
         >
           Inspect region
         </Box>
+        {showRegionPicker ? (
+          <X
+            id='icon'
+            sx={{
+              transition: 'stroke 0.15s',
+              strokeWidth: '2',
+              width: 18,
+              height: 18,
+              mt: '2px',
+              ml: [3],
+            }}
+          />
+        ) : (
+          <Search
+            id='icon'
+            sx={{
+              transition: 'stroke 0.15s',
+              strokeWidth: '2',
+              width: 18,
+              height: 18,
+              mt: '2px',
+              ml: [3],
+            }}
+          />
+        )}
       </Box>
 
       <AnimateHeight
