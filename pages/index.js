@@ -9,7 +9,6 @@ import { RegionDataDisplay } from '../components/region'
 import Layers from '../components/options/layers'
 import Years from '../components/options/years'
 import Viewer from '../components/viewer'
-import Methods from '../components/methods'
 import RegionalEmissions from '../components/regional-emissions'
 
 const sx = {
@@ -32,12 +31,6 @@ const initialLayers = {
 function Index() {
   const [layers, setLayers] = useState(initialLayers)
   const [year, setYear] = useState('2001')
-  const [showMethods, setShowMethods] = useState(false)
-
-  const toggleMethods = () => setShowMethods(!showMethods)
-  const methods = (
-    <Methods showMethods={showMethods} toggleMethods={toggleMethods} />
-  )
 
   return (
     <>
