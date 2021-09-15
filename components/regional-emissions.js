@@ -6,25 +6,50 @@ import { Box, Flex } from 'theme-ui'
 import { useRegion } from '@carbonplan/maps'
 import { RecenterButton, useRegionContext } from './region'
 
+const degToRad = (degrees) => {
+  var pi = Math.PI
+  return degrees * (pi / 180)
+}
+
+const areaOfPixel = (pixelSize, centerLat) => {
+  const a = 6378137 // meters
+  const b = 6356752.3142 // meters
+  const e = Math.sqrt(1 - Math.pow(b / a, 2))
+  const delta = [centerLat + pixelSize / 2, centerLat - pixelSize / 2]
+  const areaList = delta.map((f) => {
+    const zm = 1 - e * Math.sin(degToRad(f))
+    const zp = 1 + e * Math.sin(degToRad(f))
+    return (
+      Math.PI *
+      Math.pow(b, 2) *
+      (Math.log(zp / zm) / (2 * e) + Math.sin(degToRad(f)) / (zp * zm))
+    )
+  })
+  return ((pixelSize / 360) * (areaList[0] - areaList[1])) / (1000 * 1000) // to km2
+}
+
 export const RegionalEmissions = ({ year, color = 'red' }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
-  const data = regionData?.value || {}
+  const data = regionData?.value
 
   const radius = region?.properties?.radius || 0
+  const center = region?.properties?.center || 0
   // regional area in km2
   const regionArea = Math.PI * radius * radius
+  const areaCorrection = areaOfPixel(1 / 40, center.lat)
+  console.log(areaCorrection)
 
   const chartData = useMemo(() => {
     let lineData = []
 
-    for (const yearKey in data) {
-      const yearData = data[yearKey]
-      const year = Number(yearKey.replace(/\D/g, ''))
-      const filteredData = yearData.filter((d) => !Number.isNaN(d))
-      const sum = filteredData.reduce((a, d) => a + d, 0)
-      lineData.push([year, sum * regionArea])
-    }
+    if (!data) return []
+
+    data.coordinates.year.forEach((year) => {
+      const yearData = data.emissions[year]
+      const average = yearData.reduce((a, d) => a + d, 0) / yearData.length
+      lineData.push([year, (average / areaCorrection) * regionArea])
+    })
 
     return lineData
   }, [data, regionArea])
@@ -90,9 +115,9 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
         <Column start={1} width={3}>
           {chartData.length > 0 && (
             <Box sx={{ width: '100%', height: '200px' }}>
-              <Chart x={[2001, 2015]} y={range} padding={{ top: 50, left: 0 }}>
+              <Chart x={[2001, 2020]} y={range} padding={{ top: 50, left: 0 }}>
                 <Grid values={[range[0]]} horizontal />
-                <TickLabels values={[2001, 2015]} bottom />
+                <TickLabels values={[2001, 2020]} bottom />
 
                 <Plot>
                   {validYearData && (

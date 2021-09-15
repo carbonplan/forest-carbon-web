@@ -7,7 +7,7 @@ function Layers({ layers, setLayers, sx }) {
     <Row columns={3}>
       <Column start={1} width={3}>
         <Text sx={sx.heading}>
-          Committed emissions
+          Layers
           <Info>
             Annual estimates of committed emissions based on biomass loss.
             Emissions reflect an unknown combination of several drivers,
@@ -18,7 +18,7 @@ function Layers({ layers, setLayers, sx }) {
         <Filter
           values={layers}
           setValues={setLayers}
-          colors={{ forests: 'red' }}
+          colors={{ emissions: 'orange' }}
           sx={{ mt: [3] }}
         />
       </Column>
