@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Row, Column } from '@carbonplan/components'
 import { Chart, Grid, Plot, Line, TickLabels, Circle } from '@carbonplan/charts'
-import { Box } from 'theme-ui'
+import { Box, Flex } from 'theme-ui'
 
 import { RecenterButton, useRegionContext } from './region'
 
@@ -39,8 +39,8 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
 
   return (
     <>
-      <Row columns={6} sx={{ mt: 3 }}>
-        <Column start={1} width={3}>
+      <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Box>
           <Box
             sx={{
               color: 'red',
@@ -66,25 +66,23 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
           >
             MtCO₂
           </Box>
-        </Column>
-        <Column start={4} width={3}>
-          <Box
-            as='span'
-            sx={{
-              fontFamily: 'faux',
-              letterSpacing: 'faux',
-              color: 'secondary',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              fontSize: [0],
-            }}
-          >
-            <Box>Recenter map</Box>
-            <RecenterButton color='secondary' />
-          </Box>
-        </Column>
-      </Row>
+        </Box>
+        <Box
+          as='span'
+          sx={{
+            fontFamily: 'faux',
+            letterSpacing: 'faux',
+            color: 'secondary',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            fontSize: [0],
+          }}
+        >
+          <Box>Recenter map</Box>
+          <RecenterButton color='secondary' />
+        </Box>
+      </Flex>
       <Row columns={3}>
         <Column start={1} width={3}>
           {chartData.length > 0 && (
