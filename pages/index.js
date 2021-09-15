@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, Container } from 'theme-ui'
 import { Group, Meta, Guide, Link, Header } from '@carbonplan/components'
+import { useBreakpointIndex } from '@theme-ui/match-media'
 
 import ControlPanel from '../components/control-panel'
 import ControlPanelDivider from '../components/control-panel-divider'
@@ -33,6 +34,8 @@ function Index() {
   const [layers, setLayers] = useState(initialLayers)
   const [year, setYear] = useState('2001')
   const [expanded, setExpanded] = useState(false)
+
+  const index = useBreakpointIndex()
 
   return (
     <>
@@ -101,10 +104,12 @@ function Index() {
                 <Layers layers={layers} setLayers={setLayers} sx={sx} />
                 <ControlPanelDivider />
                 <Years year={year} setYear={setYear} sx={sx} />
-                <ControlPanelDivider />
-                <RegionDataDisplay sx={sx}>
-                  <RegionalEmissions year={year} />
-                </RegionDataDisplay>
+                {index > 0 && <ControlPanelDivider />}
+                {index > 0 && (
+                  <RegionDataDisplay sx={sx}>
+                    <RegionalEmissions year={year} />
+                  </RegionDataDisplay>
+                )}
               </Group>
             </ControlPanel>
           </Container>
