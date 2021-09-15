@@ -32,6 +32,7 @@ const initialLayers = {
 function Index() {
   const [layers, setLayers] = useState(initialLayers)
   const [year, setYear] = useState('2001')
+  const [expanded, setExpanded] = useState(false)
 
   return (
     <>
@@ -41,7 +42,10 @@ function Index() {
       </Container>
       <Box sx={{ position: 'absolute', top: 0, width: '100%', zIndex: 5000 }}>
         <Container>
-          <Header dimmer={'none'} />
+          <Header
+            dimmer={'none'}
+            settings={{ expanded, onClick: () => setExpanded((prev) => !prev) }}
+          />
         </Container>
       </Box>
       <Box
@@ -66,9 +70,17 @@ function Index() {
                   >
                     blog post
                   </Link>
-                  , play with the <Link onClick={() => {}}>map</Link>
+                  , play with the{' '}
+                  <Link
+                    sx={{ pointerEvents: 'all' }}
+                    onClick={() => setExpanded(true)}
+                  >
+                    map
+                  </Link>
                 </span>
               }
+              expanded={expanded}
+              setExpanded={setExpanded}
             >
               <Group spacing={4}>
                 <Box sx={sx.description}>

@@ -1,11 +1,19 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Box } from 'theme-ui'
-import { Row, Column } from '@carbonplan/components'
+import { Row, Column, Tray } from '@carbonplan/components'
+import { useBreakpointIndex } from '@theme-ui/match-media'
+import Info from './info'
 
 import { useRegionContext } from './region'
 
-const ControlPanel = ({ children, title, description }) => {
-  const [expanded, setExpanded] = useState(false)
+const ControlPanel = ({
+  children,
+  title,
+  description,
+  expanded,
+  setExpanded,
+}) => {
+  const index = useBreakpointIndex()
   const { showRegionPicker, setShowRegionPicker } = useRegionContext()
 
   const handleToggleExpanded = useCallback(() => {
@@ -29,6 +37,60 @@ const ControlPanel = ({ children, title, description }) => {
       setExpanded(true)
     }
   }, [showRegionPicker])
+
+  const overview = (
+    <Column start={[1, 5, 7, 7]} width={[4, 4, 5, 5]}>
+      <Box
+        sx={{
+          mt: [9],
+          opacity: expanded ? 0 : 1,
+          transition: 'opacity 0.3s',
+          position: 'relative',
+          display: 'block',
+          zIndex: 1001,
+          fontSize: [5, 7, 7, 8],
+          letterSpacing: 'heading',
+          fontFamily: 'heading',
+          lineHeight: 'heading',
+          pointerEvents: 'none',
+        }}
+      >
+        {title}
+      </Box>
+      <Box
+        sx={{
+          mt: [3],
+          opacity: expanded ? 0 : 1,
+          transition: 'opacity 0.3s',
+          position: 'relative',
+          display: 'block',
+          zIndex: 1001,
+          fontSize: [2, 3, 3, 4],
+          pointerEvents: 'none',
+        }}
+      >
+        {description}
+      </Box>
+    </Column>
+  )
+
+  if (index === 0) {
+    return (
+      <>
+        <Tray
+          expanded={expanded}
+          sx={{
+            pb: [4],
+            pt: [5],
+            transform: expanded ? 'translateY(0)' : 'translateY(-550px)',
+          }}
+        >
+          {children}
+        </Tray>
+        <Row>{overview}</Row>
+      </>
+    )
+  }
 
   return (
     <Row>
@@ -112,39 +174,7 @@ const ControlPanel = ({ children, title, description }) => {
           </Box>
         </Box>
       </Column>
-      <Column start={[3, 5, 7, 7]} width={[4, 4, 5, 5]}>
-        <Box
-          sx={{
-            mt: [9],
-            opacity: expanded ? 0 : 1,
-            transition: 'opacity 0.3s',
-            position: 'relative',
-            display: 'block',
-            zIndex: 1001,
-            fontSize: [6, 7, 7, 8],
-            letterSpacing: 'heading',
-            fontFamily: 'heading',
-            lineHeight: 'heading',
-            pointerEvents: 'none',
-          }}
-        >
-          {title}
-        </Box>
-        <Box
-          sx={{
-            mt: [3],
-            opacity: expanded ? 0 : 1,
-            transition: 'opacity 0.3s',
-            position: 'relative',
-            display: 'block',
-            zIndex: 1001,
-            fontSize: [3, 3, 3, 4],
-            pointerEvents: 'none',
-          }}
-        >
-          {description}
-        </Box>
-      </Column>
+      {overview}
     </Row>
   )
 }
