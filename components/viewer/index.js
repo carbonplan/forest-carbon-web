@@ -35,8 +35,8 @@ function Viewer({ children, year }) {
           'https://carbonplan-climatetrace.s3.us-west-2.amazonaws.com/v0.4/map/emissions_pyramid.zarr'
         }
         variable={'emissions'}
-        dimensions={['year','y','x']}
-        selector={{year: parseInt(year)}}
+        dimensions={['year', 'y', 'x']}
+        selector={{ year: parseInt(year) }}
         setRegionData={setRegionData}
       />
       <Enhancers />

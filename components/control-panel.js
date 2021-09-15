@@ -141,8 +141,8 @@ const ControlPanel = ({ children, title, description }) => {
             fontSize: [3, 3, 3, 4],
             pointerEvents: 'none',
           }}
-          >
-        {description}
+        >
+          {description}
         </Box>
       </Column>
     </Row>

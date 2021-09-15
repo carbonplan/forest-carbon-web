@@ -22,7 +22,7 @@ const sx = {
   },
   description: {
     fontSize: [1, 1, 1, 2],
-    pb: [2]
+    pb: [2],
   },
 }
 
@@ -62,7 +62,21 @@ function Index() {
       >
         <Viewer year={year}>
           <Container>
-            <ControlPanel title='Mapping forest carbon' description={<span>Read our <Link sx={{pointerEvents: 'all'}} href='/blog/climate-trace-release'>blog post</Link>, play with the <Link onClick={() => {}}>map</Link></span>}>
+            <ControlPanel
+              title='Mapping forest carbon'
+              description={
+                <span>
+                  Read our{' '}
+                  <Link
+                    sx={{ pointerEvents: 'all' }}
+                    href='/blog/climate-trace-release'
+                  >
+                    blog post
+                  </Link>
+                  , play with the <Link onClick={() => {}}>map</Link>
+                </span>
+              }
+            >
               <Group spacing={4}>
                 <Box sx={sx.description}>
                   This map shows annual committed emissions from stand-replacing
