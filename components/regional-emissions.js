@@ -67,7 +67,7 @@ export const RegionalEmissions = ({ year, color = 'red' }) => {
               ml: [2],
             }}
           >
-            tCO₂/km²
+            tCO₂
           </Box>
         </Box>
         <Box
