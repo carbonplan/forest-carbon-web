@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, Container } from 'theme-ui'
 import { Group, Meta, Guide, Link, Header } from '@carbonplan/components'
+import { useBreakpointIndex } from '@theme-ui/match-media'
 
 import ControlPanel from '../components/control-panel'
 import ControlPanelDivider from '../components/control-panel-divider'
@@ -32,7 +33,10 @@ const initialLayers = {
 function Index() {
   const [layers, setLayers] = useState(initialLayers)
   const [year, setYear] = useState('2001')
+  const [expanded, setExpanded] = useState(false)
 
+  const index = useBreakpointIndex()
+  const isMobile = index === 0
   return (
     <>
       <Meta />
@@ -40,9 +44,35 @@ function Index() {
         <Guide color='teal' />
       </Container>
       <Box sx={{ position: 'absolute', top: 0, width: '100%', zIndex: 5000 }}>
-        <Container>
-          <Header dimmer={'none'} />
-        </Container>
+        <Box
+          as='header'
+          sx={
+            isMobile
+              ? {
+                  width: '100%',
+                  borderStyle: 'solid',
+                  borderColor: 'muted',
+                  borderWidth: '0px',
+                  borderBottomWidth: '1px',
+                  position: 'sticky',
+                  top: 0,
+                  bg: 'background',
+                  height: '56px',
+                  zIndex: 2000,
+                }
+              : {}
+          }
+        >
+          <Container>
+            <Header
+              dimmer={'none'}
+              settings={{
+                expanded,
+                onClick: () => setExpanded((prev) => !prev),
+              }}
+            />
+          </Container>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -60,10 +90,23 @@ function Index() {
               description={
                 <span>
                   Read our{' '}
-                  <Link href='/blog/climate-trace-release'>blog post</Link>,
-                  play with the <Link onClick={() => {}}>map</Link>
+                  <Link
+                    sx={{ pointerEvents: 'all' }}
+                    href='/blog/climate-trace-release'
+                  >
+                    blog post
+                  </Link>
+                  , play with the{' '}
+                  <Link
+                    sx={{ pointerEvents: 'all' }}
+                    onClick={() => setExpanded(true)}
+                  >
+                    map
+                  </Link>
                 </span>
               }
+              expanded={expanded}
+              setExpanded={setExpanded}
             >
               <Group spacing={4}>
                 <Box sx={sx.description}>
@@ -84,10 +127,12 @@ function Index() {
                 <Layers layers={layers} setLayers={setLayers} sx={sx} />
                 <ControlPanelDivider />
                 <Years year={year} setYear={setYear} sx={sx} />
-                <ControlPanelDivider />
-                <RegionDataDisplay sx={sx}>
-                  <RegionalEmissions year={year} />
-                </RegionDataDisplay>
+                {!isMobile && <ControlPanelDivider />}
+                {!isMobile && (
+                  <RegionDataDisplay sx={sx}>
+                    <RegionalEmissions year={year} />
+                  </RegionDataDisplay>
+                )}
               </Group>
             </ControlPanel>
           </Container>
