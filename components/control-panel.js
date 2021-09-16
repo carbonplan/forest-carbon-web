@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Box, IconButton } from 'theme-ui'
 import { Right, Left } from '@carbonplan/icons'
 import { Row, Column, Tray } from '@carbonplan/components'
@@ -15,6 +15,7 @@ const ControlPanel = ({
 }) => {
   const index = useBreakpointIndex()
   const { showRegionPicker, setShowRegionPicker } = useRegionContext()
+  const [hasExpanded, setHasExpanded] = useState(expanded)
 
   const handleToggleExpanded = useCallback(() => {
     // Always allow opening of panel
@@ -37,6 +38,12 @@ const ControlPanel = ({
       setExpanded(true)
     }
   }, [showRegionPicker])
+
+  useEffect(() => {
+    if (expanded && !hasExpanded) {
+      setHasExpanded(true)
+    }
+  }, [expanded, hasExpanded])
 
   const overview = (
     <Column start={[1, 5, 7, 7]} width={[4, 4, 5, 5]}>
@@ -87,7 +94,7 @@ const ControlPanel = ({
         >
           {children}
         </Tray>
-        <Row>{overview}</Row>
+        {!hasExpanded && <Row>{overview}</Row>}
       </>
     )
   }
