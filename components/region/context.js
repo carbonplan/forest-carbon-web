@@ -1,10 +1,19 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { useBreakpointIndex } from '@theme-ui/match-media'
 
 const RegionContext = createContext(null)
 
 export const RegionProvider = ({ children }) => {
   const [regionData, setRegionData] = useState(null)
   const [showRegionPicker, setShowRegionPicker] = useState(false)
+  const index = useBreakpointIndex()
+
+  useEffect(() => {
+    // Always hide region picker at mobile
+    if (index === 0) {
+      setShowRegionPicker(false)
+    }
+  }, [index])
 
   return (
     <RegionContext.Provider
