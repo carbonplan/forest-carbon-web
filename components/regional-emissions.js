@@ -65,7 +65,7 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
   }, [data, regionArea])
 
   if (!regionData || regionData.loading) {
-    return 'loading...'
+    return <Box sx={{pt: [3], color: 'secondary', fontFamily: 'faux', letterSpacing: 'faux', fontSize: [2, 2, 2, 3]}}>loading...</Box>
   }
   const rangeData = chartData.map((d) => d[1])
   const min = Math.min(...rangeData)
