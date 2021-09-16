@@ -29,6 +29,8 @@ function Viewer({ children, year }) {
           color={theme.colors.primary}
           backgroundColor={theme.colors.background}
           fontFamily={theme.fonts.monospace}
+          minRadius={50}
+          maxRadius={4000}
         />
       )}
       <Raster
