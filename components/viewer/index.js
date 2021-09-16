@@ -7,7 +7,7 @@ import { useColormap } from '@carbonplan/colormaps'
 import { allOptions } from '@constants'
 import { useRegionContext } from '../region'
 
-function Viewer({ children, year }) {
+function Viewer({ children, year, layers }) {
   const { theme } = useThemeUI()
   const { setRegionData, showRegionPicker } = useRegionContext()
 
@@ -37,7 +37,7 @@ function Viewer({ children, year }) {
       <Raster
         colormap={colormap}
         clim={[0, 5000]}
-        display={true}
+        display={layers.emissions}
         opacity={1}
         mode={'dotgrid'}
         fillValue={3.4028234663852886e38}

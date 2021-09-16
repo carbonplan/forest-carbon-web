@@ -22,6 +22,7 @@ function Layers({ layers, setLayers, sx }) {
           setValues={setLayers}
           colors={{ emissions: mode === 'light' ? 'red' : 'orange' }}
           sx={{ mt: [2] }}
+          multiSelect={true}
         />
       </Column>
     </Row>

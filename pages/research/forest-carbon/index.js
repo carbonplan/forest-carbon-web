@@ -90,7 +90,7 @@ function Index() {
           left: 0,
         }}
       >
-        <Viewer year={year}>
+        <Viewer year={year} layers={layers}>
           <Container>
             <ControlPanel
               title='Mapping forest carbon'
