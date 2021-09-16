@@ -40,7 +40,11 @@ function Index() {
 
   return (
     <>
-      <Meta />
+      <Meta 
+        title={'forest carbon / research / carbonplan'}
+        description={'Mapping forest carbon for biomass and emissions monitoring.'}
+        card={'https://images.carbonplan.org/social/forest-carbon.png'}
+      />
       <Container>
         <Guide color='teal' />
       </Container>
