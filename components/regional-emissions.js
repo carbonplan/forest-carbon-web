@@ -38,7 +38,6 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
   // regional area in km2
   const regionArea = Math.PI * radius * radius
   const areaCorrection = areaOfPixel(1 / 40, center.lat)
-  console.log(areaCorrection)
 
   const chartData = useMemo(() => {
     let lineData = []
@@ -47,8 +46,19 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
 
     data.coordinates.year.forEach((year) => {
       const yearData = data.emissions[year]
-      const average = yearData.reduce((a, d) => a + d, 0) / yearData.length
-      lineData.push([year, (average / areaCorrection) * regionArea])
+      const average =
+        yearData.reduce((accum, emissions, idx) => {
+          const lat = data.coordinates.lat[idx]
+          const area = areaOfPixel(1 / 40, lat)
+          return accum + emissions / area
+        }, 0) / yearData.length
+
+      const oldAverage = yearData.reduce((a, d) => a + d, 0) / yearData.length
+      const oldValue = (oldAverage / areaCorrection) * regionArea
+
+      console.log({ oldValue, newValue: average * regionArea })
+
+      lineData.push([year, average * regionArea])
     })
 
     return lineData
