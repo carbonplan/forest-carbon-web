@@ -12,8 +12,8 @@ function Years({ year, setYear, sx }) {
         <Box sx={sx.heading}>
           Time
           <Info margin={'22px'}>
-            Data have been processed for years 2001 through 2020. Drag the
-            slider to update the map for the selected year.
+            Annual estimates are available for the years 2001 through 2020. Drag
+            the slider to update the map for the selected year.
           </Info>
         </Box>
         <Slider

@@ -8,7 +8,7 @@ export default function Enhancers() {
     <>
       <Toolbar position={'right'}>
         <RulerButton />
-        <Dimmer sx={{ color: 'primary' }} />
+        <Dimmer sx={{ display: ['none', 'none', 'unset', 'unset'], color: 'primary' }} />
       </Toolbar>
     </>
   )
