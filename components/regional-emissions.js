@@ -28,57 +28,51 @@ const areaOfPixel = (pixelSize, centerLat) => {
   return ((pixelSize / 360) * (areaList[0] - areaList[1])) / (1000 * 1000) // to km2
 }
 
+const areaOfPixelProjected = (lat, zoom) => {
+  const c = 40075016.686 / 1000
+  return Math.pow(
+    (c * Math.cos(degToRad(lat))) / Math.pow(2, Math.floor(zoom) + 7),
+    2
+  )
+}
+
 export const RegionalEmissions = ({ year, color = 'orange' }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
   const data = regionData?.value
-
-  const regionArea = region?.properties?.area || 0
-  const radius = region?.properties?.radius || 0
-  const center = region?.properties?.center || 0
-  // regional area in km2
-  const circleArea = Math.PI * radius * radius
-  const areaCorrection = areaOfPixel(1 / 40, center.lat)
+  const zoom = region?.properties?.zoom || 0
 
   const chartData = useMemo(() => {
-    console.log({ polygon: regionArea, circle: circleArea })
-
     let lineData = []
-
     if (!data) return []
-
     data.coordinates.year.forEach((year) => {
       const yearData = data.emissions[year]
-      const average =
-        yearData.reduce((accum, emissions, idx) => {
-          const lat = data.coordinates.lat[idx]
-          const area = areaOfPixel(1 / 40, lat)
-          return accum + emissions / area
-        }, 0) / yearData.length
-
-      const areas = data.coordinates.lat.map((lat) => areaOfPixel(1 / 40, lat))
-
-      // console.log('lats', {
-      //   min: Math.min(...data.coordinates.lat),
-      //   max: Math.max(...data.coordinates.lat),
-      //   center: center.lat,
-      // })
-      // console.log('areas', {
-      //   min: Math.min(...areas),
-      //   max: Math.max(...areas),
-      //   old: areaCorrection,
-      // })
-      const oldAverage = yearData.reduce((a, d) => a + d, 0) / yearData.length
-      const oldValue = (oldAverage / areaCorrection) * circleArea
-
-      lineData.push([year, average * regionArea])
+      const average = yearData.reduce((accum, emissions, idx) => {
+        const lat = data.coordinates.lat[idx]
+        const area = areaOfPixel(1 / 40, lat) // area of 3km pixel at lat
+        const projectedArea = areaOfPixelProjected(lat, zoom) // area of web mercator pixel at lat,zoom
+        return accum + (emissions / area) * projectedArea
+      }, 0)
+      lineData.push([year, average])
     })
 
     return lineData
-  }, [data, regionArea])
+  }, [data])
 
   if (!regionData || regionData.loading) {
-    return <Box sx={{pt: [3], color: 'secondary', fontFamily: 'faux', letterSpacing: 'faux', fontSize: [2, 2, 2, 3]}}>loading...</Box>
+    return (
+      <Box
+        sx={{
+          pt: [3],
+          color: 'secondary',
+          fontFamily: 'faux',
+          letterSpacing: 'faux',
+          fontSize: [2, 2, 2, 3],
+        }}
+      >
+        loading...
+      </Box>
+    )
   }
   const rangeData = chartData.map((d) => d[1])
   const min = Math.min(...rangeData)
@@ -91,7 +85,11 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
   return (
     <>
       <Flex
-        sx={{ pt: [3], flexDirection: 'row', justifyContent: 'space-between' }}
+        sx={{
+          pt: ['12px'],
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
       >
         <Box>
           <Box
@@ -125,7 +123,11 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
         <Column start={1} width={3}>
           {chartData.length > 0 && (
             <Box sx={{ width: '100%', height: '170px' }}>
-              <Chart x={[2001, 2020]} y={range} padding={{ top: 10, left: 0 }}>
+              <Chart
+                x={[2001, 2020]}
+                y={range}
+                padding={{ top: 10, left: 7, right: 7 }}
+              >
                 <Grid values={[2005, 2010, 2015, 2020]} vertical />
                 <TickLabels values={[2005, 2010, 2015, 2020]} bottom />
                 <Plot>
@@ -134,7 +136,7 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
                       x={yearData[0]}
                       y={yearData[1]}
                       color={color}
-                      size={15}
+                      size={18}
                     />
                   )}
                   <Line data={chartData} width={2} color={color} />
