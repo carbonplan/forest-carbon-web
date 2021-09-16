@@ -124,7 +124,7 @@ const ControlPanel = ({
                 'calc(3 * 100vw / 12 + 37px)',
                 'calc(3 * 100vw / 12 + 54px)',
               ]
-            : '14px',
+            : '12px',
           bottom: '13px',
           transform: expanded ? 'scaleX(-1)' : '',
           zIndex: 1001,
