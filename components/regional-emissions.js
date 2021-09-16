@@ -33,13 +33,16 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
   const { region } = useRegion()
   const data = regionData?.value
 
+  const regionArea = region?.properties?.area || 0
   const radius = region?.properties?.radius || 0
   const center = region?.properties?.center || 0
   // regional area in km2
-  const regionArea = Math.PI * radius * radius
+  const circleArea = Math.PI * radius * radius
   const areaCorrection = areaOfPixel(1 / 40, center.lat)
 
   const chartData = useMemo(() => {
+    console.log({ polygon: regionArea, circle: circleArea })
+
     let lineData = []
 
     if (!data) return []
@@ -53,10 +56,20 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
           return accum + emissions / area
         }, 0) / yearData.length
 
-      const oldAverage = yearData.reduce((a, d) => a + d, 0) / yearData.length
-      const oldValue = (oldAverage / areaCorrection) * regionArea
+      const areas = data.coordinates.lat.map((lat) => areaOfPixel(1 / 40, lat))
 
-      //console.log({ oldValue, newValue: average * regionArea })
+      // console.log('lats', {
+      //   min: Math.min(...data.coordinates.lat),
+      //   max: Math.max(...data.coordinates.lat),
+      //   center: center.lat,
+      // })
+      // console.log('areas', {
+      //   min: Math.min(...areas),
+      //   max: Math.max(...areas),
+      //   old: areaCorrection,
+      // })
+      const oldAverage = yearData.reduce((a, d) => a + d, 0) / yearData.length
+      const oldValue = (oldAverage / areaCorrection) * circleArea
 
       lineData.push([year, average * regionArea])
     })
