@@ -3,14 +3,14 @@ import { Box, Container, useColorMode } from 'theme-ui'
 import { Group, Meta, Guide, Link, Header } from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
 
-import ControlPanel from '../components/control-panel'
-import ControlPanelDivider from '../components/control-panel-divider'
-import { RegionDataDisplay } from '../components/region'
+import ControlPanel from '../../../components/control-panel'
+import ControlPanelDivider from '../../../components/control-panel-divider'
+import { RegionDataDisplay } from '../../../components/region'
 
-import Layers from '../components/options/layers'
-import Years from '../components/options/years'
-import Viewer from '../components/viewer'
-import RegionalEmissions from '../components/regional-emissions'
+import Layers from '../../../components/options/layers'
+import Years from '../../../components/options/years'
+import Viewer from '../../../components/viewer'
+import RegionalEmissions from '../../../components/regional-emissions'
 
 const sx = {
   heading: {
