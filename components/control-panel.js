@@ -79,7 +79,7 @@ const ControlPanel = ({
           userSelect: 'none',
         }}
       >
-        {description(expanded)}
+        {description}
       </Box>
     </Column>
   )

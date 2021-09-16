@@ -87,26 +87,24 @@ function Index() {
           <Container>
             <ControlPanel
               title='Mapping forest carbon'
-              description={(expanded) => {
-                return (
-                  <span>
-                    Read our{' '}
-                    <Link
-                      sx={{ pointerEvents: expanded ? 'none' : 'all' }}
-                      href='/blog/climate-trace-release'
-                    >
-                      blog post
-                    </Link>
-                    , play with the{' '}
-                    <Link
-                      sx={{ pointerEvents: expanded ? 'none' : 'all' }}
-                      onClick={() => setExpanded(true)}
-                    >
-                      map
-                    </Link>
-                  </span>
-                )
-              }}
+              description={
+                <span>
+                  Read our{' '}
+                  <Link
+                    sx={{ pointerEvents: expanded ? 'none' : 'all' }}
+                    href='/blog/climate-trace-release'
+                  >
+                    blog post
+                  </Link>
+                  , play with the{' '}
+                  <Link
+                    sx={{ pointerEvents: expanded ? 'none' : 'all' }}
+                    onClick={() => setExpanded(true)}
+                  >
+                    map
+                  </Link>
+                </span>
+              }
               expanded={expanded}
               setExpanded={setExpanded}
             >
