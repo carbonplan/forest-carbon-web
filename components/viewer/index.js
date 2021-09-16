@@ -28,7 +28,8 @@ function Viewer({ children, year }) {
         <RegionPicker
           color={theme.colors.primary}
           backgroundColor={theme.colors.background}
-          fontFamily={theme.fonts.monospace}
+          fontFamily={theme.fonts.mono}
+          fontSize={'14px'}
           minRadius={50}
           maxRadius={4000}
         />
