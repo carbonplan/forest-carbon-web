@@ -46,7 +46,7 @@ const ControlPanel = ({
   }, [expanded, hasExpanded])
 
   const overview = (
-    <Column start={[1, 5, 7, 7]} width={[4, 4, 5, 5]}>
+    <Column start={[1, 2, 7, 7]} width={[4, 4, 5, 5]}>
       <Box
         sx={{
           mt: [9],
@@ -81,7 +81,7 @@ const ControlPanel = ({
     </Column>
   )
 
-  if (index === 0) {
+  if (index < 2) {
     return (
       <>
         <Tray

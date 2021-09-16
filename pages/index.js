@@ -36,7 +36,7 @@ function Index() {
   const [expanded, setExpanded] = useState(false)
 
   const index = useBreakpointIndex()
-  const isMobile = index === 0
+  const isNarrow = index < 2
   return (
     <>
       <Meta />
@@ -47,7 +47,7 @@ function Index() {
         <Box
           as='header'
           sx={
-            isMobile
+            isNarrow
               ? {
                   width: '100%',
                   borderStyle: 'solid',
@@ -127,8 +127,8 @@ function Index() {
                 <Layers layers={layers} setLayers={setLayers} sx={sx} />
                 <ControlPanelDivider />
                 <Years year={year} setYear={setYear} sx={sx} />
-                {!isMobile && <ControlPanelDivider />}
-                {!isMobile && (
+                {!isNarrow && <ControlPanelDivider />}
+                {!isNarrow && (
                   <RegionDataDisplay sx={sx}>
                     <RegionalEmissions year={year} />
                   </RegionDataDisplay>
