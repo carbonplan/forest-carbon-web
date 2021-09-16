@@ -30,7 +30,7 @@
   "homepage": "https://github.com/carbonplan/maps#readme",
   "dependencies": {
     "@carbonplan/charts": "^2.0.0",
-    "@carbonplan/colormaps": "^2.0.0",
+    "@carbonplan/colormaps": "^2.0.1",
     "@carbonplan/components": "^10.1.1",
     "@carbonplan/icons": "^1.0.0",
     "@carbonplan/maps": "1.0.0-alpha.15",
