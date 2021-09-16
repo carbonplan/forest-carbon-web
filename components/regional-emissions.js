@@ -56,7 +56,7 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
       const oldAverage = yearData.reduce((a, d) => a + d, 0) / yearData.length
       const oldValue = (oldAverage / areaCorrection) * regionArea
 
-      console.log({ oldValue, newValue: average * regionArea })
+      //console.log({ oldValue, newValue: average * regionArea })
 
       lineData.push([year, average * regionArea])
     })

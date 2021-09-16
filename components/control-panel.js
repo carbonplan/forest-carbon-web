@@ -121,7 +121,7 @@ const ControlPanel = ({
             ? [
                 'calc(3 * 100vw / 6 - 12px)',
                 'calc(3 * 100vw / 8 - 18px)',
-                'calc(3 * 100vw / 12 + 36px)',
+                'calc(3 * 100vw / 12 + 37px)',
                 'calc(3 * 100vw / 12 + 54px)',
               ]
             : '14px',

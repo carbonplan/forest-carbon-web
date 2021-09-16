@@ -15,7 +15,14 @@ function Viewer({ children, year }) {
 
   const yearIdx = allOptions.years.indexOf(year)
   return (
-    <Map style={style} zoom={2} center={[0, 0]} debug={false}>
+    <Map
+      maxZoom={8}
+      minZoom={1}
+      style={style}
+      zoom={2}
+      center={[0, 0]}
+      debug={false}
+    >
       <Basemap />
       {showRegionPicker && (
         <RegionPicker
