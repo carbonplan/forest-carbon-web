@@ -10,9 +10,10 @@ function Layers({ layers, setLayers, sx }) {
           Layers
           <Info>
             Annual estimates of committed emissions based on biomass loss.
-            Emissions reflect an unknown combination of several drivers,
-            including fires, insects, drought, harvest, and conversion. Based on
-            data from Baccini et al. (2012) and Hansen et al. (2013).
+            Forests lose biomass via a variety of processes (e.g. deforestation,
+            harvest, fire) each of which produces CO₂ at different timescales.
+            Regardless, the biomass losses are "committed" to becoming emissions
+            eventually.
           </Info>
         </Text>
         <Filter

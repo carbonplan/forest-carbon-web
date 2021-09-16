@@ -94,7 +94,7 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
               ml: [2],
             }}
           >
-            tCO₂
+            tCO₂ in {year}
           </Box>
         </Box>
       </Flex>

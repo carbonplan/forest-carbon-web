@@ -90,19 +90,9 @@ function Index() {
               description={
                 <span>
                   Read our{' '}
-                  <Link
-                    sx={{ pointerEvents: 'all' }}
-                    href='/blog/climate-trace-release'
-                  >
-                    blog post
-                  </Link>
-                  , play with the{' '}
-                  <Link
-                    sx={{ pointerEvents: 'all' }}
-                    onClick={() => setExpanded(true)}
-                  >
-                    map
-                  </Link>
+                  <Link href='/blog/climate-trace-release'>blog post</Link>,
+                  play with the{' '}
+                  <Link onClick={() => setExpanded(true)}>map</Link>
                 </span>
               }
               expanded={expanded}
