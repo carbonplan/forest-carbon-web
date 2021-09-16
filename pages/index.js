@@ -103,7 +103,7 @@ function Index() {
                   >
                     blog post
                   </Link>
-                  , play with the{' '}
+                  , explore the{' '}
                   <Link
                     sx={{ pointerEvents: expanded ? 'none' : 'all' }}
                     onClick={() => setExpanded(true)}
