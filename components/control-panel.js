@@ -17,6 +17,7 @@ const ControlPanel = ({
   const index = useBreakpointIndex()
   const { showRegionPicker, setShowRegionPicker } = useRegionContext()
   const [hasExpanded, setHasExpanded] = useState(expanded)
+  const [tooltip, setTooltip] = useState(false)
 
   const handleToggleExpanded = useCallback(() => {
     // Always allow opening of panel
@@ -107,6 +108,10 @@ const ControlPanel = ({
       <IconButton
         aria-label='Toggle settings'
         onClick={handleToggleExpanded}
+        onMouseOver={() => {
+          if (!expanded) setTooltip(true)
+        }}
+        onMouseOut={() => setTooltip(false)}
         role='checkbox'
         sx={{
           width: 32,
@@ -130,8 +135,25 @@ const ControlPanel = ({
           zIndex: 1001,
         }}
       >
-        <ArrowThin sx={{ strokeWidth: 2.5, width: 24, height: 24 }} />
+        <ArrowThin sx={{ strokeWidth: 2, width: 24, height: 24 }} />
       </IconButton>
+      <Box
+        id='open-tooltip'
+        sx={{
+          display: ['none', 'none', 'inline-block', 'inline-block'],
+          color: 'primary',
+          position: 'absolute',
+          opacity: tooltip ? 1 : 0,
+          transition: 'opacity 0.15s ease-out',
+          pointerEvents: 'none',
+          left: '54px',
+          bottom: ['18px', '18px', '18px', '14px'],
+          zIndex: 1001,
+          fontSize: [3, 3, 3, 4],
+        }}
+      >
+        Show controls
+      </Box>
       <Row>
         <Column width={3} start={1}>
           <Box
@@ -169,6 +191,7 @@ const ControlPanel = ({
                 pointerEvents: 'all',
                 bg: 'background',
                 overflowY: 'scroll',
+                overflowX: 'hidden',
                 maxHeight: 'calc(100vh - 56px)',
                 minHeight: 'calc(100vh - 56px)',
                 transition: 'border 0.2s',

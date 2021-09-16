@@ -94,7 +94,7 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
         <Box>
           <Box
             sx={{
-              color: 'orange',
+              color: color,
               fontFamily: 'mono',
               letterSpacing: 'mono',
               fontSize: [4],

@@ -4,6 +4,7 @@ import { X } from '@carbonplan/icons'
 import AnimateHeight from 'react-animate-height'
 
 import Search from '../icons/search'
+import Info from '../info'
 import { useRegionContext } from './context'
 
 export const RegionDataDisplay = ({ children, sx }) => {
@@ -12,60 +13,69 @@ export const RegionDataDisplay = ({ children, sx }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          ...sx.heading,
-          display: 'flex',
-          cursor: 'pointer',
-          width: 'fit-content',
-          '@media (hover: hover) and (pointer: fine)': {
-            '&:hover > #icon': { stroke: 'secondary' },
-            '&:hover > #label': { color: 'secondary' },
-          },
-        }}
-        onClick={() => setShowRegionPicker(!showRegionPicker)}
-      >
+      <Box>
         <Box
-          as='span'
-          id='label'
-          sx={{ color: 'primary', transition: 'color 0.15s' }}
+          sx={{
+            display: 'inline-block',
+            mt: ['-4px'],
+            cursor: 'pointer',
+            '@media (hover: hover) and (pointer: fine)': {
+              '&:hover > #icon': { stroke: 'secondary' },
+              '&:hover > #label': { color: 'secondary' },
+            },
+          }}
+          onClick={() => setShowRegionPicker(!showRegionPicker)}
         >
-          Inspect region
+          <Box
+            id='label'
+            sx={{
+              ...sx.heading,
+              transition: 'color 0.15s',
+              display: 'inline-block',
+            }}
+          >
+            Inspect region
+          </Box>
+
+          {showRegionPicker ? (
+            <X
+              id='icon'
+              sx={{
+                transition: 'stroke 0.15s',
+                strokeWidth: '2',
+                width: 18,
+                height: 18,
+                top: '3px',
+                position: 'relative',
+                ml: [3],
+              }}
+            />
+          ) : (
+            <Search
+              id='icon'
+              sx={{
+                transition: 'stroke 0.15s',
+                strokeWidth: '2',
+                width: 18,
+                height: 18,
+                top: '3px',
+                position: 'relative',
+                ml: [3],
+              }}
+            />
+          )}
         </Box>
-        {showRegionPicker ? (
-          <X
-            id='icon'
-            sx={{
-              transition: 'stroke 0.15s',
-              strokeWidth: '2',
-              width: 18,
-              height: 18,
-              mt: '2px',
-              ml: [3],
-            }}
-          />
-        ) : (
-          <Search
-            id='icon'
-            sx={{
-              transition: 'stroke 0.15s',
-              strokeWidth: '2',
-              width: 18,
-              height: 18,
-              mt: '2px',
-              ml: [3],
-            }}
-          />
-        )}
+        <Info>
+          Committed emissions occurring within the circled region are summed to
+          produce an annual time series.
+        </Info>
       </Box>
 
-      <AnimateHeight
-        duration={150}
-        height={showRegionPicker && regionData ? 'auto' : 0}
-        easing={'linear'}
+      <Box
+        sx={{ opacity: showRegionPicker ? 1 : 0, transition: 'opacity 0.15s' }}
       >
         {showRegionPicker ? children : <div />}
-      </AnimateHeight>
+      </Box>
     </>
   )
 }

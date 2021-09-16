@@ -1,8 +1,9 @@
-import { Text } from 'theme-ui'
+import { Text, useColorMode } from 'theme-ui'
 import { Filter, Row, Column } from '@carbonplan/components'
 import Info from '../info'
 
 function Layers({ layers, setLayers, sx }) {
+  const [mode] = useColorMode()
   return (
     <Row columns={3}>
       <Column start={1} width={3}>
@@ -19,7 +20,7 @@ function Layers({ layers, setLayers, sx }) {
         <Filter
           values={layers}
           setValues={setLayers}
-          colors={{ emissions: 'orange' }}
+          colors={{ emissions: mode === 'light' ? 'red' : 'orange' }}
           sx={{ mt: [2] }}
         />
       </Column>

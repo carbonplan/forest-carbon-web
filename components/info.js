@@ -30,7 +30,7 @@ const Info = ({ children }) => {
           display: 'inline-block',
           float: 'right',
           mr: '-10px',
-          mt: '-6px',
+          mt: '-8px',
           '@media (hover: hover) and (pointer: fine)': {
             '&:hover > #icon': {
               stroke: 'text',
