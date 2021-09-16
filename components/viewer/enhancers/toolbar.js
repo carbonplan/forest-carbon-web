@@ -17,8 +17,8 @@ export default function Toolbar({ children, position }) {
       case 'right':
         return {
           guide: {
-            right: `0px`,
-            bottom: 0,
+            right: `-1px`,
+            bottom: '3px',
           },
           button: {
             marginLeft: '2px',

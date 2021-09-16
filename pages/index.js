@@ -35,7 +35,7 @@ function Index() {
   const [year, setYear] = useState('2001')
   const [expanded, setExpanded] = useState(false)
 
-  const index = useBreakpointIndex()
+  const index = useBreakpointIndex({ defaultIndex: 2 })
   const isMobile = index === 0
   return (
     <>
@@ -87,14 +87,26 @@ function Index() {
           <Container>
             <ControlPanel
               title='Mapping forest carbon'
-              description={
-                <span>
-                  Read our{' '}
-                  <Link href='/blog/climate-trace-release'>blog post</Link>,
-                  play with the{' '}
-                  <Link onClick={() => setExpanded(true)}>map</Link>
-                </span>
-              }
+              description={(expanded) => {
+                return (
+                  <span>
+                    Read our{' '}
+                    <Link
+                      sx={{ pointerEvents: expanded ? 'none' : 'all' }}
+                      href='/blog/climate-trace-release'
+                    >
+                      blog post
+                    </Link>
+                    , play with the{' '}
+                    <Link
+                      sx={{ pointerEvents: expanded ? 'none' : 'all' }}
+                      onClick={() => setExpanded(true)}
+                    >
+                      map
+                    </Link>
+                  </span>
+                )
+              }}
               expanded={expanded}
               setExpanded={setExpanded}
             >

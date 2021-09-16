@@ -4,6 +4,7 @@ import { Right, Left } from '@carbonplan/icons'
 import { Row, Column, Tray } from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
 
+import ArrowThin from './icons/arrow-thin'
 import { useRegionContext } from './region'
 
 const ControlPanel = ({
@@ -53,6 +54,7 @@ const ControlPanel = ({
           fontFamily: 'heading',
           lineHeight: 'heading',
           pointerEvents: 'none',
+          userSelect: 'none',
         }}
       >
         {title}
@@ -66,10 +68,11 @@ const ControlPanel = ({
           display: 'block',
           zIndex: 1001,
           fontSize: [2, 3, 3, 4],
-          pointerEvents: expanded ? 'none' : 'all',
+          pointerEvents: 'none',
+          userSelect: 'none',
         }}
       >
-        {description}
+        {description(expanded)}
       </Box>
     </Column>
   )
@@ -95,42 +98,32 @@ const ControlPanel = ({
   return (
     <>
       <IconButton
-        aria-label='Toggle dark mode'
+        aria-label='Toggle settings'
         onClick={handleToggleExpanded}
         role='checkbox'
         sx={{
           width: 32,
           height: 32,
-          display: 'inline-block',
+          display: ['none', 'none', 'inline-block', 'inline-block'],
           cursor: 'pointer',
           color: 'primary',
           position: 'absolute',
-          opacity: expanded ? 1 : 0,
-          left: '400px',
-          bottom: '14px',
+          opacity: 1,
+          transition: 'left 0.2s, transform 0.2s',
+          left: expanded
+            ? [
+                'calc(3 * 100vw / 6 - 12px)',
+                'calc(3 * 100vw / 8 - 18px)',
+                'calc(3 * 100vw / 12 + 36px)',
+                'calc(3 * 100vw / 12 + 54px)',
+              ]
+            : '14px',
+          bottom: '13px',
+          transform: expanded ? 'scaleX(-1)' : '',
           zIndex: 1001,
         }}
       >
-        <Left sx={{ width: 22, height: 22 }} />
-      </IconButton>
-      <IconButton
-        aria-label='Toggle dark mode'
-        onClick={handleToggleExpanded}
-        role='checkbox'
-        sx={{
-          width: 32,
-          height: 32,
-          display: 'inline-block',
-          cursor: 'pointer',
-          color: 'primary',
-          position: 'absolute',
-          opacity: expanded ? 0 : 1,
-          left: '14px',
-          bottom: '14px',
-          zIndex: 1001,
-        }}
-      >
-        <Right sx={{ width: 22, height: 22 }} />
+        <ArrowThin sx={{ strokeWidth: 2.5, width: 24, height: 24 }} />
       </IconButton>
       <Row>
         <Column width={3} start={1}>
