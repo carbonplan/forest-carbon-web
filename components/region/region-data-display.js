@@ -66,7 +66,7 @@ export const RegionDataDisplay = ({ children, sx }) => {
           )}
         </Box>
         <Info>
-          Committed emissions occurring within the circled region are summed to
+          Activates a circular region inspector that you can drag and resize on the map. Committed emissions occurring within the circled region are summed to
           produce an annual time series.
         </Info>
       </Box>
