@@ -49,7 +49,8 @@ const ControlPanel = ({ children, title, description }) => {
           zIndex: 1001,
         }}
       >
-        <Left sx={{}} />
+        <Left sx={{width: 22, height: 22}} />
+
       </IconButton>
       <IconButton
         aria-label='Toggle dark mode'
@@ -68,7 +69,7 @@ const ControlPanel = ({ children, title, description }) => {
           zIndex: 1001,
         }}
       >
-        <Right />
+        <Right sx={{width: 22, height: 22}}/>
       </IconButton>
       <Row>
         <Column width={3} start={1}>
