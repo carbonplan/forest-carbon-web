@@ -22,7 +22,7 @@ const sx = {
   },
   description: {
     fontSize: [1, 1, 1, 2],
-    pb: [2],
+    pb: ['2px'],
   },
 }
 
