@@ -1,10 +1,8 @@
-import { Box, useThemeUI } from 'theme-ui'
-import style from './style'
-import Enhancers from './enhancers'
-import Basemap from './basemap'
-import { Map, Raster, RegionPicker } from '@carbonplan/maps'
+import { useThemeUI } from 'theme-ui'
+import { Line, Map, Raster, RegionPicker } from '@carbonplan/maps'
 import { useColormap } from '@carbonplan/colormaps'
-import { allOptions } from '@constants'
+
+import Enhancers from './enhancers'
 import { useRegionContext } from '../region'
 
 function Viewer({ children, year, layers }) {
@@ -13,17 +11,16 @@ function Viewer({ children, year, layers }) {
 
   const colormap = useColormap('fire')
 
-  const yearIdx = allOptions.years.indexOf(year)
   return (
-    <Map
-      maxZoom={8}
-      minZoom={1}
-      style={style}
-      zoom={2}
-      center={[0, 0]}
-      debug={false}
-    >
-      <Basemap />
+    <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
+      <Line
+        color={theme.rawColors.primary}
+        source={
+          'https://storage.googleapis.com/carbonplan-research/articles/offset-project-fire/basemap'
+        }
+        variable={'ne_10m_land'}
+      />
+
       {showRegionPicker && (
         <RegionPicker
           color={theme.colors.primary}
