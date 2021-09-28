@@ -9,7 +9,8 @@ function Viewer({ children, year, layers }) {
   const { theme } = useThemeUI()
   const { setRegionData, showRegionPicker } = useRegionContext()
 
-  const colormap = useColormap('fire')
+  const emissions = useColormap('fire')
+  const biomass = useColormap('earth')
 
   return (
     <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
@@ -32,7 +33,7 @@ function Viewer({ children, year, layers }) {
         />
       )}
       <Raster
-        colormap={colormap}
+        colormap={emissions}
         clim={[0, 5000]}
         display={layers.emissions}
         opacity={1}
@@ -45,6 +46,20 @@ function Viewer({ children, year, layers }) {
         dimensions={['year', 'y', 'x']}
         selector={{ year: parseInt(year) }}
         setRegionData={setRegionData}
+      />
+      <Raster
+        colormap={biomass}
+        clim={[0, 350]}
+        display={layers.biomass}
+        opacity={1}
+        mode={'dotgrid'}
+        fillValue={9.969209968386869e36}
+        source={
+          'https://carbonplan-climatetrace.s3.us-west-2.amazonaws.com/v1.2/map/emissions_pyramid.zarr'
+        }
+        variable={'biomass_v1'}
+        dimensions={['year', 'y', 'x']}
+        selector={{ year: Math.max(parseInt(year), 2014) }}
       />
       <Enhancers />
       {children}

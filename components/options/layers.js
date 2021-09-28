@@ -20,7 +20,10 @@ function Layers({ layers, setLayers, sx }) {
         <Filter
           values={layers}
           setValues={setLayers}
-          colors={{ emissions: mode === 'light' ? 'red' : 'orange' }}
+          colors={{
+            emissions: mode === 'light' ? 'red' : 'orange',
+            biomass: 'green',
+          }}
           sx={{ mt: [2] }}
           multiSelect={true}
         />

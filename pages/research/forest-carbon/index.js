@@ -28,6 +28,7 @@ const sx = {
 
 const initialLayers = {
   emissions: true,
+  biomass: true,
 }
 
 function Index() {
