@@ -1,6 +1,8 @@
 const isDev =
   process.env.VERCEL_ENV === 'preview' || process.env.NODE_ENV === 'development'
 
+console.log('isDev', isDev)
+console.log('env', process.env.VERCEL_ENV)
 const path = require('path')
 
 //// MODULE ALIASES ////
