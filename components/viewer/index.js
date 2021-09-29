@@ -22,7 +22,9 @@ function Viewer({ children, year, layers }) {
   const { setRegionData, showRegionPicker } = useRegionContext()
 
   const layer = Object.keys(layers).find((l) => layers[l])
-  const colormap = useColormap(COLORMAPS[layer])
+  const colormap = useColormap(
+    COLORMAPS[layer] || COLORMAPS.emissions_from_clearing
+  )
 
   return (
     <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
@@ -46,7 +48,7 @@ function Viewer({ children, year, layers }) {
       )}
       <Raster
         colormap={colormap}
-        clim={CLIMS[layer]}
+        clim={CLIMS[layer] || CLIMS.emissions_from_clearing}
         display={true}
         opacity={1}
         mode={'dotgrid'}
