@@ -1,8 +1,11 @@
 const isDev =
-  process.env.VERCEL_ENV === 'preview' || process.env.NODE_ENV === 'development'
+  process.env.VERCEL_ENV === 'preview' ||
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' ||
+  process.env.NODE_ENV === 'development'
 
 console.log('isDev', isDev)
 console.log('env', process.env.VERCEL_ENV)
+console.log('public env', process.env.NEXT_PUBLIC_VERCEL_ENV)
 const path = require('path')
 
 //// MODULE ALIASES ////
