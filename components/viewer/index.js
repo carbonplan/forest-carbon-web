@@ -53,7 +53,7 @@ function Viewer({ children, year, layers }) {
         }
         variable={'variable'}
         setRegionData={setRegionData}
-        selector={{ year: Math.max(parseInt(year), 2014), band: 'layer' }}
+        selector={{ year: Math.max(parseInt(year), 2014), band: layer }}
       />
       <Enhancers />
       {children}
