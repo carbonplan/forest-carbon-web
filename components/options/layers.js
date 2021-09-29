@@ -4,6 +4,8 @@ import Info from '../info'
 
 function Layers({ layers, setLayers, sx }) {
   const [mode] = useColorMode()
+  const emissionsColor = mode === 'light' ? 'red' : 'orange'
+
   return (
     <Row columns={3}>
       <Column start={1} width={3}>
@@ -21,8 +23,9 @@ function Layers({ layers, setLayers, sx }) {
           values={layers}
           setValues={setLayers}
           colors={{
-            emissions: mode === 'light' ? 'red' : 'orange',
-            biomass: 'green',
+            emissions_from_clearing: emissionsColor,
+            emissions_from_fire: emissionsColor,
+            sinks: emissionsColor,
           }}
           sx={{ mt: [2] }}
           multiSelect={true}

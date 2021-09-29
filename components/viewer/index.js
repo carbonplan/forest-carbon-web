@@ -49,7 +49,7 @@ function Viewer({ children, year, layers }) {
       <Raster
         colormap={colormap}
         clim={CLIMS[layer] || CLIMS.emissions_from_clearing}
-        display={true}
+        display={!!layer}
         opacity={1}
         mode={'dotgrid'}
         fillValue={9.969209968386869e36}
@@ -58,7 +58,10 @@ function Viewer({ children, year, layers }) {
         }
         variable={'variable'}
         setRegionData={setRegionData}
-        selector={{ year: Math.max(parseInt(year), 2015), band: layer }}
+        selector={{
+          year: Math.max(parseInt(year), 2015),
+          band: layer || 'emissions_from_clearing',
+        }}
       />
       <Enhancers />
       {children}
