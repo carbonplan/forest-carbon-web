@@ -6,13 +6,16 @@ import Enhancers from './enhancers'
 import { useRegionContext } from '../region'
 
 const COLORMAPS = {
-  emissions: 'fire',
-  biomass: 'earth',
+  emissions_from_clearing: 'fire',
+  emissions_from_fire: 'fire',
+  sinks: 'fire',
 }
 
 const CLIMS = {
   emissions: [0, 5000],
-  biomass: [0, 350],
+  emissions_from_clearing: [0, 350],
+  emissions_from_fire: [0, 350],
+  sinks: [0, 350],
 }
 function Viewer({ children, year, layers }) {
   const { theme } = useThemeUI()
@@ -53,7 +56,7 @@ function Viewer({ children, year, layers }) {
         }
         variable={'variable'}
         setRegionData={setRegionData}
-        selector={{ year: Math.max(parseInt(year), 2014), band: layer }}
+        selector={{ year: Math.max(parseInt(year), 2015), band: layer }}
       />
       <Enhancers />
       {children}
