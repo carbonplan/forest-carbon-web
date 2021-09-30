@@ -86,13 +86,6 @@ export const RegionalData = ({ layer, year }) => {
       </Box>
     )
   }
-  const rangeData = chartData[layer].map((d) => d[1])
-  const min = Math.min(...rangeData)
-  const max = Math.max(...rangeData)
-  const range = [min * 0.75, max]
-
-  const yearData = chartData[layer].find((d) => d[0] === Number(year))
-  const validYearData = yearData && !Number.isNaN(yearData[1])
 
   const { biomass, ...emissionsData } = chartData
 

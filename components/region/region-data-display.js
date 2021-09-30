@@ -1,15 +1,12 @@
 import { Box } from 'theme-ui'
-import { Expander } from '@carbonplan/components'
 import { X } from '@carbonplan/icons'
-import AnimateHeight from 'react-animate-height'
 
 import Search from '../icons/search'
 import Info from '../info'
 import { useRegionContext } from './context'
 
 export const RegionDataDisplay = ({ children, sx }) => {
-  const { showRegionPicker, setShowRegionPicker, regionData } =
-    useRegionContext()
+  const { showRegionPicker, setShowRegionPicker } = useRegionContext()
 
   return (
     <>
