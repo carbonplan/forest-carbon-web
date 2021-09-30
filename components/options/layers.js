@@ -23,12 +23,13 @@ function Layers({ layers, setLayers, sx }) {
           values={layers}
           setValues={setLayers}
           colors={{
-            emissions_from_clearing: emissionsColor,
-            emissions_from_fire: emissionsColor,
-            sinks: emissionsColor,
+            biomass: 'green',
+            'emissions-v1': emissionsColor,
+            'sinks-v1': emissionsColor,
+            'net-v1': emissionsColor,
+            'emissions-v0': emissionsColor,
           }}
           sx={{ mt: [2] }}
-          multiSelect={true}
         />
       </Column>
     </Row>

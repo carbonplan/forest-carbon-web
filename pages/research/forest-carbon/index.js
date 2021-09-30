@@ -27,14 +27,16 @@ const sx = {
 }
 
 const initialLayers = {
-  emissions_from_clearing: true,
-  emissions_from_fire: false,
-  sinks: false,
+  biomass: true,
+  'emissions-v1': false,
+  'sinks-v1': false,
+  'net-v1': false,
+  'emissions-v0': false,
 }
 
 function Index() {
   const [layers, setLayers] = useState(initialLayers)
-  const [year, setYear] = useState('2001')
+  const [year, setYear] = useState('2015')
   const [expanded, setExpanded] = useState(false)
   const [colorMode] = useColorMode()
   const index = useBreakpointIndex({ defaultIndex: 2 })

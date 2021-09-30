@@ -26,7 +26,7 @@ function Years({ year, setYear, sx }) {
           onMouseDown={() => {
             setSliderChanging(true)
           }}
-          min={2001}
+          min={2014}
           max={2020}
           step={1}
         />
@@ -44,7 +44,7 @@ function Years({ year, setYear, sx }) {
               float: 'left',
             }}
           >
-            2001
+            2014
           </Box>
           <Box
             sx={{
