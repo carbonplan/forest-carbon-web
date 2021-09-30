@@ -1,12 +1,10 @@
-import { Text, useColorMode } from 'theme-ui'
+import { Text } from 'theme-ui'
 import { Filter, Row, Column } from '@carbonplan/components'
+import { useLayerColors } from '../use-layer-colors'
 import Info from '../info'
 
 function Layers({ layers, setLayers, sx }) {
-  const [mode] = useColorMode()
-  const fireColor = mode === 'light' ? 'red' : 'orange'
-  const earthColor = mode === 'light' ? 'green' : 'yellow'
-  const waterColor = mode === 'light' ? 'blue' : 'teal'
+  const { colors } = useLayerColors()
 
   return (
     <Row columns={3}>
@@ -24,13 +22,7 @@ function Layers({ layers, setLayers, sx }) {
         <Filter
           values={layers}
           setValues={setLayers}
-          colors={{
-            biomass: earthColor,
-            'emissions-v1': fireColor,
-            'sinks-v1': waterColor,
-            'net-v1': 'green',
-            'emissions-v0': fireColor,
-          }}
+          colors={colors}
           sx={{ mt: [2] }}
         />
       </Column>

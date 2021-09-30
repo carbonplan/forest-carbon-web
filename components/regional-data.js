@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 import { Row, Column } from '@carbonplan/components'
 import { Chart, Grid, Plot, Line, TickLabels, Circle } from '@carbonplan/charts'
 import { Box, Flex } from 'theme-ui'
-
 import { useRegion } from '@carbonplan/maps'
 import { useRegionContext } from './region'
+import { useLayerColors } from './use-layer-colors'
 
 const degToRad = (degrees) => {
   var pi = Math.PI
@@ -36,9 +36,11 @@ const areaOfPixelProjected = (lat, zoom) => {
   )
 }
 
-export const RegionalData = ({ layer, year, color = 'orange' }) => {
+export const RegionalData = ({ layer, year }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
+  const { colors } = useLayerColors()
+  const color = colors[layer]
   const data = regionData?.value
   const zoom = region?.properties?.zoom || 0
 

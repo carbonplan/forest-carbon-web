@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Container, useColorMode } from 'theme-ui'
+import { Box, Container } from 'theme-ui'
 import { Group, Meta, Guide, Link, Header } from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
 
@@ -38,7 +38,6 @@ function Index() {
   const [layers, setLayers] = useState(initialLayers)
   const [year, setYear] = useState('2015')
   const [expanded, setExpanded] = useState(false)
-  const [colorMode] = useColorMode()
   const index = useBreakpointIndex({ defaultIndex: 2 })
   const isNarrow = index < 2
 
@@ -149,11 +148,7 @@ function Index() {
                 {!isNarrow && <ControlPanelDivider />}
                 {!isNarrow && (
                   <RegionDataDisplay sx={sx}>
-                    <RegionalData
-                      layer={layer}
-                      year={year}
-                      color={colorMode === 'light' ? 'red' : 'orange'}
-                    />
+                    <RegionalData layer={layer} year={year} />
                   </RegionDataDisplay>
                 )}
               </Group>
