@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import { Box, Flex } from 'theme-ui'
+import { useEffect, useMemo, useRef } from 'react'
+import { Box } from 'theme-ui'
 import { useRegion } from '@carbonplan/maps'
 import { useRegionContext } from './region'
 import { useLayerColors } from './use-layer-colors'
@@ -39,8 +39,16 @@ export const RegionalData = ({ layer, year }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
   const { colors } = useLayerColors()
+  const container = useRef()
   const data = regionData?.value
   const zoom = region?.properties?.zoom || 0
+  const isLoaded = regionData && !regionData.loading
+
+  useEffect(() => {
+    if (isLoaded) {
+      container.current.scrollIntoView(false)
+    }
+  }, [isLoaded])
 
   const chartData = useMemo(() => {
     if (!data) return {}
@@ -71,7 +79,7 @@ export const RegionalData = ({ layer, year }) => {
     return lineData
   }, [layer, data])
 
-  if (!regionData || regionData.loading) {
+  if (!isLoaded) {
     return (
       <Box
         sx={{
@@ -90,7 +98,7 @@ export const RegionalData = ({ layer, year }) => {
   const { biomass, ...emissionsData } = chartData
 
   return (
-    <>
+    <div ref={container}>
       <Box
         sx={{
           pt: [3],
@@ -115,7 +123,7 @@ export const RegionalData = ({ layer, year }) => {
         biomass
       </Box>
       <TimeSeries data={{ biomass }} highlight='biomass' year={year} />
-    </>
+    </div>
   )
 }
 export default RegionalData
