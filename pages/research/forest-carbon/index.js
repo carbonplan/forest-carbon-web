@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Box, Container } from 'theme-ui'
 import { Group, Meta, Guide, Link, Header } from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
@@ -36,12 +36,21 @@ const initialLayers = {
 
 function Index() {
   const [layers, setLayers] = useState(initialLayers)
-  const [year, setYear] = useState('2015')
+  const [year, setYear] = useState(2015)
   const [expanded, setExpanded] = useState(false)
   const index = useBreakpointIndex({ defaultIndex: 2 })
   const isNarrow = index < 2
 
   const layer = Object.keys(layers).find((l) => layers[l])
+  const handleLayersChange = useCallback(
+    (value) => {
+      if (year === 2014 && !value.biomass) {
+        setYear(2015)
+      }
+      setLayers(value)
+    },
+    [year]
+  )
 
   return (
     <>
@@ -142,9 +151,18 @@ function Index() {
                   for more details.
                 </Box>
                 <ControlPanelDivider />
-                <Layers layers={layers} setLayers={setLayers} sx={sx} />
+                <Layers
+                  layers={layers}
+                  setLayers={handleLayersChange}
+                  sx={sx}
+                />
                 <ControlPanelDivider />
-                <Years year={year} setYear={setYear} sx={sx} />
+                <Years
+                  min={layer === 'biomass' ? 2014 : 2015}
+                  year={year}
+                  setYear={setYear}
+                  sx={sx}
+                />
                 {!isNarrow && <ControlPanelDivider />}
                 {!isNarrow && (
                   <RegionDataDisplay sx={sx}>

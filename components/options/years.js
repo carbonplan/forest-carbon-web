@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Box } from 'theme-ui'
-import { Row, Column, Tag, Slider } from '@carbonplan/components'
+import { Row, Column, Slider } from '@carbonplan/components'
 import Info from '../info'
 
-function Years({ year, setYear, sx }) {
+function Years({ min, year, setYear, sx }) {
   const [sliderChanging, setSliderChanging] = useState(false)
 
   return (
@@ -22,7 +22,7 @@ function Years({ year, setYear, sx }) {
           onMouseUp={() => {
             setSliderChanging(false)
           }}
-          onChange={(e) => setYear(e.target.value)}
+          onChange={(e) => setYear(Math.max(e.target.value, min))}
           onMouseDown={() => {
             setSliderChanging(true)
           }}

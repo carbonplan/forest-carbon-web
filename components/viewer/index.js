@@ -66,7 +66,7 @@ function Viewer({ children, year, layer }) {
         variable={'variable'}
         setRegionData={setRegionData}
         selector={{
-          year: Math.max(parseInt(year), 2015),
+          year: parseInt(year),
           band: layer || fallback,
         }}
         frag={`
