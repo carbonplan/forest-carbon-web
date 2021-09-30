@@ -4,7 +4,9 @@ import Info from '../info'
 
 function Layers({ layers, setLayers, sx }) {
   const [mode] = useColorMode()
-  const emissionsColor = mode === 'light' ? 'red' : 'orange'
+  const fireColor = mode === 'light' ? 'red' : 'orange'
+  const earthColor = mode === 'light' ? 'green' : 'yellow'
+  const waterColor = mode === 'light' ? 'blue' : 'teal'
 
   return (
     <Row columns={3}>
@@ -23,11 +25,11 @@ function Layers({ layers, setLayers, sx }) {
           values={layers}
           setValues={setLayers}
           colors={{
-            biomass: 'green',
-            'emissions-v1': emissionsColor,
-            'sinks-v1': emissionsColor,
-            'net-v1': emissionsColor,
-            'emissions-v0': emissionsColor,
+            biomass: earthColor,
+            'emissions-v1': fireColor,
+            'sinks-v1': waterColor,
+            'net-v1': 'green',
+            'emissions-v0': fireColor,
           }}
           sx={{ mt: [2] }}
         />
