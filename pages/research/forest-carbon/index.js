@@ -10,7 +10,7 @@ import { RegionDataDisplay } from '../../../components/region'
 import Layers from '../../../components/options/layers'
 import Years from '../../../components/options/years'
 import Viewer from '../../../components/viewer'
-import RegionalEmissions from '../../../components/regional-emissions'
+import RegionalData from '../../../components/regional-data'
 
 const sx = {
   heading: {
@@ -41,6 +41,8 @@ function Index() {
   const [colorMode] = useColorMode()
   const index = useBreakpointIndex({ defaultIndex: 2 })
   const isNarrow = index < 2
+
+  const layer = Object.keys(layers).find((l) => layers[l])
 
   return (
     <>
@@ -94,7 +96,7 @@ function Index() {
           left: 0,
         }}
       >
-        <Viewer year={year} layers={layers}>
+        <Viewer year={year} layer={layer}>
           <Container>
             <ControlPanel
               title='Mapping forest carbon'
@@ -147,7 +149,8 @@ function Index() {
                 {!isNarrow && <ControlPanelDivider />}
                 {!isNarrow && (
                   <RegionDataDisplay sx={sx}>
-                    <RegionalEmissions
+                    <RegionalData
+                      layer={layer}
                       year={year}
                       color={colorMode === 'light' ? 'red' : 'orange'}
                     />

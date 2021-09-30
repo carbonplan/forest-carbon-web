@@ -22,11 +22,10 @@ const CLIMS = {
   'net-v1': [0, 5000],
   'emissions-v0': [0, 5000],
 }
-function Viewer({ children, year, layers }) {
+function Viewer({ children, year, layer }) {
   const { theme } = useThemeUI()
   const { setRegionData, showRegionPicker } = useRegionContext()
 
-  const layer = Object.keys(layers).find((l) => layers[l])
   const colormap = useColormap(COLORMAPS[layer] || COLORMAPS[fallback])
 
   return (

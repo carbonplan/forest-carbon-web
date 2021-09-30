@@ -4,7 +4,7 @@ import { Chart, Grid, Plot, Line, TickLabels, Circle } from '@carbonplan/charts'
 import { Box, Flex } from 'theme-ui'
 
 import { useRegion } from '@carbonplan/maps'
-import { RecenterButton, useRegionContext } from './region'
+import { useRegionContext } from './region'
 
 const degToRad = (degrees) => {
   var pi = Math.PI
@@ -36,7 +36,7 @@ const areaOfPixelProjected = (lat, zoom) => {
   )
 }
 
-export const RegionalEmissions = ({ year, color = 'orange' }) => {
+export const RegionalData = ({ layer, year, color = 'orange' }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
   const data = regionData?.value
@@ -46,18 +46,23 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
     let lineData = []
     if (!data) return []
     data.coordinates.year.forEach((year) => {
-      const yearData = data.emissions[year]
-      const average = yearData.reduce((accum, emissions, idx) => {
+      const yearData = data.variable[layer][year].filter(
+        (v) => v !== 9.969209968386869e36
+      )
+      const average = yearData.reduce((accum, value, idx) => {
         const lat = data.coordinates.lat[idx]
         const area = areaOfPixel(1 / 40, lat) // area of 3km pixel at lat
         const projectedArea = areaOfPixelProjected(lat, zoom) // area of web mercator pixel at lat,zoom
-        return accum + (emissions / area) * projectedArea
+        return accum + (value / area) * projectedArea
       }, 0)
-      lineData.push([year, average])
+
+      if (yearData.length > 0) {
+        lineData.push([year, average])
+      }
     })
 
     return lineData
-  }, [data])
+  }, [layer, data])
 
   if (!regionData || regionData.loading) {
     return (
@@ -124,12 +129,12 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
           {chartData.length > 0 && (
             <Box sx={{ width: '100%', height: '170px' }}>
               <Chart
-                x={[2001, 2020]}
+                x={[2014, 2020]}
                 y={range}
                 padding={{ top: 10, left: 7, right: 7 }}
               >
-                <Grid values={[2005, 2010, 2015, 2020]} vertical />
-                <TickLabels values={[2005, 2010, 2015, 2020]} bottom />
+                <Grid values={[2014, 2016, 2018, 2020]} vertical />
+                <TickLabels values={[2014, 2016, 2018, 2020]} bottom />
                 <Plot>
                   {validYearData && (
                     <Circle
@@ -149,4 +154,4 @@ export const RegionalEmissions = ({ year, color = 'orange' }) => {
     </>
   )
 }
-export default RegionalEmissions
+export default RegionalData
