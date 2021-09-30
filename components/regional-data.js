@@ -49,6 +49,8 @@ export const RegionalData = ({ layer, year, color = 'orange' }) => {
       const yearData = data.variable[layer][year].filter(
         (v) => v !== 9.969209968386869e36
       )
+      console.log('min', Math.min(...yearData))
+      console.log('max', Math.max(...yearData))
       const average = yearData.reduce((accum, value, idx) => {
         const lat = data.coordinates.lat[idx]
         const area = areaOfPixel(1 / 40, lat) // area of 3km pixel at lat

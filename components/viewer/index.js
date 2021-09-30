@@ -6,11 +6,11 @@ import Enhancers from './enhancers'
 import { useRegionContext } from '../region'
 
 const COLORMAPS = {
-  biomass: 'earth',
-  'emissions-v1': 'fire',
-  'sinks-v1': 'fire',
-  'net-v1': 'fire',
-  'emissions-v0': 'fire',
+  biomass: { name: 'earth', reversed: false },
+  'emissions-v1': { name: 'fire', reversed: false },
+  'emissions-v0': { name: 'fire', reversed: false },
+  'sinks-v1': { name: 'water', reversed: true },
+  'net-v1': { name: 'pinkgreen', reversed: false },
 }
 
 const fallback = 'emissions-v1'
@@ -19,14 +19,19 @@ const CLIMS = {
   biomass: [0, 1000],
   'emissions-v1': [0, 5000],
   'sinks-v1': [-5000, 0],
-  'net-v1': [0, 5000],
+  'net-v1': [-30000, 30000],
   'emissions-v0': [0, 5000],
 }
 function Viewer({ children, year, layer }) {
   const { theme } = useThemeUI()
   const { setRegionData, showRegionPicker } = useRegionContext()
 
-  const colormap = useColormap(COLORMAPS[layer] || COLORMAPS[fallback])
+  const { name, reversed } = COLORMAPS[layer] || COLORMAPS[fallback]
+
+  const colormap = useColormap(name)
+  if (reversed) {
+    colormap.reverse()
+  }
 
   return (
     <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
