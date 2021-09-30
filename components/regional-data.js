@@ -1,10 +1,9 @@
 import { useMemo } from 'react'
-import { Row, Column } from '@carbonplan/components'
-import { Chart, Grid, Plot, Line, TickLabels, Circle } from '@carbonplan/charts'
 import { Box, Flex } from 'theme-ui'
 import { useRegion } from '@carbonplan/maps'
 import { useRegionContext } from './region'
 import { useLayerColors } from './use-layer-colors'
+import TimeSeries from './time-series'
 
 const degToRad = (degrees) => {
   var pi = Math.PI
@@ -40,29 +39,33 @@ export const RegionalData = ({ layer, year }) => {
   const { regionData } = useRegionContext()
   const { region } = useRegion()
   const { colors } = useLayerColors()
-  const color = colors[layer]
   const data = regionData?.value
   const zoom = region?.properties?.zoom || 0
 
   const chartData = useMemo(() => {
-    let lineData = []
-    if (!data) return []
-    data.coordinates.year.forEach((year) => {
-      const yearData = data.variable[layer][year].filter(
-        (v) => v !== 9.969209968386869e36
-      )
-      console.log('min', Math.min(...yearData))
-      console.log('max', Math.max(...yearData))
-      const average = yearData.reduce((accum, value, idx) => {
-        const lat = data.coordinates.lat[idx]
-        const area = areaOfPixel(1 / 40, lat) // area of 3km pixel at lat
-        const projectedArea = areaOfPixelProjected(lat, zoom) // area of web mercator pixel at lat,zoom
-        return accum + (value / area) * projectedArea
-      }, 0)
+    if (!data) return {}
 
-      if (yearData.length > 0) {
-        lineData.push([year, average])
-      }
+    const lineData = data.coordinates.band.reduce((accum, band) => {
+      accum[band] = []
+      return accum
+    }, {})
+
+    data.coordinates.year.forEach((year) => {
+      data.coordinates.band.forEach((band) => {
+        const yearData = data.variable[band][year].filter(
+          (v) => v !== 9.969209968386869e36
+        )
+        const average = yearData.reduce((accum, value, idx) => {
+          const lat = data.coordinates.lat[idx]
+          const area = areaOfPixel(1 / 40, lat) // area of 3km pixel at lat
+          const projectedArea = areaOfPixelProjected(lat, zoom) // area of web mercator pixel at lat,zoom
+          return accum + (value / area) * projectedArea
+        }, 0)
+
+        if (yearData.length > 0) {
+          lineData[band].push([year, average])
+        }
+      })
     })
 
     return lineData
@@ -83,78 +86,42 @@ export const RegionalData = ({ layer, year }) => {
       </Box>
     )
   }
-  const rangeData = chartData.map((d) => d[1])
+  const rangeData = chartData[layer].map((d) => d[1])
   const min = Math.min(...rangeData)
   const max = Math.max(...rangeData)
   const range = [min * 0.75, max]
 
-  const yearData = chartData.find((d) => d[0] === Number(year))
+  const yearData = chartData[layer].find((d) => d[0] === Number(year))
   const validYearData = yearData && !Number.isNaN(yearData[1])
+
+  const { biomass, ...emissionsData } = chartData
 
   return (
     <>
-      <Flex
+      <Box
         sx={{
-          pt: ['12px'],
-          flexDirection: 'row',
-          justifyContent: 'space-between',
+          pt: [3],
+          color: colors.biomass,
+          fontFamily: 'faux',
+          letterSpacing: 'faux',
+          fontSize: [2, 2, 2, 3],
         }}
       >
-        <Box>
-          <Box
-            sx={{
-              color: color,
-              fontFamily: 'mono',
-              letterSpacing: 'mono',
-              fontSize: [4],
-              display: 'inline-block',
-              ml: [0],
-            }}
-          >
-            {validYearData ? (yearData[1] / 1000000).toFixed(2) + 'M' : 'n/a'}
-          </Box>{' '}
-          <Box
-            sx={{
-              fontFamily: 'faux',
-              display: 'inline-block',
-              letterSpacing: 'faux',
-              color: 'secondary',
-              fontSize: [1],
-              display: 'inline-block',
-              ml: [2],
-            }}
-          >
-            tCO₂ in {year}
-          </Box>
-        </Box>
-      </Flex>
-      <Row columns={3}>
-        <Column start={1} width={3}>
-          {chartData.length > 0 && (
-            <Box sx={{ width: '100%', height: '170px' }}>
-              <Chart
-                x={[2014, 2020]}
-                y={range}
-                padding={{ top: 10, left: 7, right: 7 }}
-              >
-                <Grid values={[2014, 2016, 2018, 2020]} vertical />
-                <TickLabels values={[2014, 2016, 2018, 2020]} bottom />
-                <Plot>
-                  {validYearData && (
-                    <Circle
-                      x={yearData[0]}
-                      y={yearData[1]}
-                      color={color}
-                      size={18}
-                    />
-                  )}
-                  <Line data={chartData} width={2} color={color} />
-                </Plot>
-              </Chart>
-            </Box>
-          )}
-        </Column>
-      </Row>
+        biomass
+      </Box>
+      <TimeSeries data={{ biomass }} highlight='biomass' year={year} />
+      <Box
+        sx={{
+          pt: [3],
+          color: colors[layer],
+          fontFamily: 'faux',
+          letterSpacing: 'faux',
+          fontSize: [2, 2, 2, 3],
+        }}
+      >
+        {layer === 'biomass' ? ' ' : layer}
+      </Box>
+      <TimeSeries data={emissionsData} highlight={layer} year={year} />
     </>
   )
 }
