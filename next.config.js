@@ -9,8 +9,6 @@ const resolve = (p) => path.resolve(__dirname, p)
 
 const aliases = {
   '@components': resolve('./components'),
-  '@constants': resolve('./constants'),
-  '@utils': resolve('./utils'),
 }
 
 //// MDX ////
