@@ -27,11 +27,11 @@ const sx = {
 }
 
 const initialLayers = {
-  biomass: true,
-  'emissions-v1': false,
+  'emissions-v1': true,
   'sinks-v1': false,
   'net-v1': false,
   'emissions-v0': false,
+  biomass: false,
 }
 
 function Index() {

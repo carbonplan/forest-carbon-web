@@ -101,18 +101,6 @@ export const RegionalData = ({ layer, year }) => {
       <Box
         sx={{
           pt: [3],
-          color: colors.biomass,
-          fontFamily: 'faux',
-          letterSpacing: 'faux',
-          fontSize: [2, 2, 2, 3],
-        }}
-      >
-        biomass
-      </Box>
-      <TimeSeries data={{ biomass }} highlight='biomass' year={year} />
-      <Box
-        sx={{
-          pt: [3],
           color: colors[layer],
           fontFamily: 'faux',
           letterSpacing: 'faux',
@@ -122,6 +110,18 @@ export const RegionalData = ({ layer, year }) => {
         {layer === 'biomass' ? ' ' : layer}
       </Box>
       <TimeSeries data={emissionsData} highlight={layer} year={year} />
+      <Box
+        sx={{
+          pt: [3],
+          color: colors.biomass,
+          fontFamily: 'faux',
+          letterSpacing: 'faux',
+          fontSize: [2, 2, 2, 3],
+        }}
+      >
+        biomass
+      </Box>
+      <TimeSeries data={{ biomass }} highlight='biomass' year={year} />
     </>
   )
 }
