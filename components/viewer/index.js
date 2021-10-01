@@ -1,8 +1,11 @@
 import { useThemeUI } from 'theme-ui'
 import { Line, Map, Raster, RegionPicker } from '@carbonplan/maps'
 import { useColormap } from '@carbonplan/colormaps'
+import { Dimmer } from '@carbonplan/components'
 
-import Enhancers from './enhancers'
+import Colorbar from './enhancers/colorbar'
+import Toolbar from './enhancers/toolbar'
+import { RulerButton } from './enhancers/ruler'
 import { useRegionContext } from '../region'
 
 const COLORMAPS = {
@@ -32,6 +35,7 @@ function Viewer({ children, year, layer }) {
   if (reversed) {
     colormap.reverse()
   }
+  const clim = CLIMS[layer] || CLIMS[fallback]
 
   return (
     <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
@@ -55,7 +59,7 @@ function Viewer({ children, year, layer }) {
       )}
       <Raster
         colormap={colormap}
-        clim={CLIMS[layer] || CLIMS[fallback]}
+        clim={clim}
         display={!!layer}
         opacity={1}
         mode={'dotgrid'}
@@ -82,7 +86,14 @@ function Viewer({ children, year, layer }) {
         gl_FragColor.rgb *= gl_FragColor.a;
         `}
       />
-      <Enhancers />
+      <Toolbar position={'right'}>
+        <RulerButton />
+        <Dimmer
+          sx={{ display: ['none', 'none', 'unset', 'unset'], color: 'primary' }}
+        />
+        <Colorbar colormap={colormap} clim={clim} units='MtCO2' />
+      </Toolbar>
+
       {children}
     </Map>
   )
