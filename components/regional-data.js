@@ -114,7 +114,12 @@ export const RegionalData = ({ layer, year }) => {
       >
         {layer.startsWith('biomass') ? ' ' : layer}
       </Box>
-      <TimeSeries data={emissionsData} highlight={layer} year={year} />
+      <TimeSeries
+        data={emissionsData}
+        highlight={layer}
+        year={year}
+        showZeroes
+      />
       <Box
         sx={{
           pt: [3],
@@ -130,6 +135,7 @@ export const RegionalData = ({ layer, year }) => {
         data={{ biomass, 'biomass-na-filled': biomassNaFilled }}
         highlight={layer}
         year={year}
+        tickDecimals={2}
       />
     </div>
   )
