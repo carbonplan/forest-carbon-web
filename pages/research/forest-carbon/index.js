@@ -32,6 +32,7 @@ const initialLayers = {
   'net-v1': false,
   'emissions-v0': false,
   biomass: false,
+  'biomass-na-filled': false,
 }
 
 function Index() {

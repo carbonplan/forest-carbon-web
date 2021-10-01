@@ -95,7 +95,11 @@ export const RegionalData = ({ layer, year }) => {
     )
   }
 
-  const { biomass, ...emissionsData } = chartData
+  const {
+    biomass,
+    'biomass-na-filled': biomassNaFilled,
+    ...emissionsData
+  } = chartData
 
   return (
     <div ref={container}>
@@ -108,7 +112,7 @@ export const RegionalData = ({ layer, year }) => {
           fontSize: [2, 2, 2, 3],
         }}
       >
-        {layer === 'biomass' ? ' ' : layer}
+        {layer.startsWith('biomass') ? ' ' : layer}
       </Box>
       <TimeSeries data={emissionsData} highlight={layer} year={year} />
       <Box
@@ -120,9 +124,13 @@ export const RegionalData = ({ layer, year }) => {
           fontSize: [2, 2, 2, 3],
         }}
       >
-        biomass
+        {layer.startsWith('biomass') ? layer : ' '}
       </Box>
-      <TimeSeries data={{ biomass }} highlight='biomass' year={year} />
+      <TimeSeries
+        data={{ biomass, 'biomass-na-filled': biomassNaFilled }}
+        highlight={layer}
+        year={year}
+      />
     </div>
   )
 }

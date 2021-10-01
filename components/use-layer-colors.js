@@ -9,6 +9,7 @@ export const useLayerColors = () => {
   return {
     colors: {
       biomass: earthColor,
+      'biomass-na-filled': earthColor,
       'emissions-v1': fireColor,
       'sinks-v1': waterColor,
       'net-v1': 'pink',
