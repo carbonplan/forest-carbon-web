@@ -31,7 +31,7 @@
   "dependencies": {
     "@carbonplan/charts": "^2.0.0",
     "@carbonplan/colormaps": "^2.0.1",
-    "@carbonplan/components": "^10.1.1",
+    "@carbonplan/components": "^10.3.0",
     "@carbonplan/icons": "^1.0.0",
     "@carbonplan/maps": "^1.0.0",
     "@carbonplan/theme": "^7.0.0",
