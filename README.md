@@ -14,6 +14,7 @@
 [github]: https://github.com/carbonplan/forest-carbon-web
 [github-badge]: https://flat.badgen.net/badge/-/github?icon=github&label
 [mit license]: https://flat.badgen.net/badge/license/MIT/blue
+
 ## building the site
 
 Assuming you already have `Node.js` installed, you can install the build dependencies as:

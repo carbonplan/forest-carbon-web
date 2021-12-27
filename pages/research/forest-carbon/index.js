@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { Box, Container, useColorMode } from 'theme-ui'
-import { Group, Meta, Guide, Link, Header, Dimmer, Settings } from '@carbonplan/components'
+import {
+  Group,
+  Meta,
+  Guide,
+  Link,
+  Header,
+  Dimmer,
+  Settings,
+} from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
 
 import ControlPanel from '../../../components/control-panel'
