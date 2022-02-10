@@ -49,7 +49,7 @@ function Index() {
   return (
     <>
       <Meta
-        title={'forest carbon / research / carbonplan'}
+        title={'Forest carbon – CarbonPlan'}
         description={
           'Mapping forest carbon for biomass and emissions monitoring.'
         }
