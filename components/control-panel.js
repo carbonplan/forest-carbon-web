@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Box, IconButton } from 'theme-ui'
-import { Right, Left } from '@carbonplan/icons'
-import { Row, Column, Tray } from '@carbonplan/components'
+import { Row, Column, Tray, useScrollbarClass } from '@carbonplan/components'
 import { useBreakpointIndex } from '@theme-ui/match-media'
 
 import ArrowThin from './icons/arrow-thin'
@@ -15,6 +14,7 @@ const ControlPanel = ({
   setExpanded,
 }) => {
   const index = useBreakpointIndex()
+  const className = useScrollbarClass()
   const { showRegionPicker, setShowRegionPicker } = useRegionContext()
   const [hasExpanded, setHasExpanded] = useState(expanded)
   const [tooltip, setTooltip] = useState(false)
@@ -184,6 +184,7 @@ const ControlPanel = ({
               }}
             />
             <Box
+              className={className}
               sx={{
                 px: [4, 5, 5, 6],
                 pb: [4],
