@@ -15,10 +15,8 @@ function Viewer({ children, year, layers }) {
     <Map maxZoom={8} minZoom={1} zoom={2} center={[0, 0]} debug={false}>
       <Line
         color={theme.rawColors.primary}
-        source={
-          'https://storage.googleapis.com/carbonplan-research/articles/offset-project-fire/basemap'
-        }
-        variable={'ne_10m_land'}
+        source={'https://storage.googleapis.com/carbonplan-maps/basemaps/land'}
+        variable={'land'}
       />
 
       {showRegionPicker && (
