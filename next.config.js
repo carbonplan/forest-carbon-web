@@ -34,13 +34,13 @@ module.exports = withMDX({
       __dirname,
       '.',
       'node_modules',
-      'react'
+      'react',
     )
     config.resolve.alias['theme-ui'] = path.resolve(
       __dirname,
       '.',
       'node_modules',
-      'theme-ui'
+      'theme-ui',
     )
 
     return config
