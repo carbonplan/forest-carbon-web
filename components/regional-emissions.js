@@ -32,7 +32,7 @@ const areaOfPixelProjected = (lat, zoom) => {
   const c = 40075016.686 / 1000
   return Math.pow(
     (c * Math.cos(degToRad(lat))) / Math.pow(2, Math.floor(zoom) + 7),
-    2
+    2,
   )
 }
 
