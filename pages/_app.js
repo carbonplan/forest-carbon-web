@@ -1,4 +1,5 @@
 import React from 'react'
+import PlausibleProvider from 'next-plausible'
 import { ThemeProvider } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 import '@carbonplan/components/fonts.css'
@@ -9,13 +10,15 @@ import { RegionProvider } from '../components/region'
 
 const App = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <MDXProvider>
-        <RegionProvider>
-          <Component {...pageProps} />
-        </RegionProvider>
-      </MDXProvider>
-    </ThemeProvider>
+    <PlausibleProvider domain='carbonplan.org'>
+      <ThemeProvider theme={theme}>
+        <MDXProvider>
+          <RegionProvider>
+            <Component {...pageProps} />
+          </RegionProvider>
+        </MDXProvider>
+      </ThemeProvider>
+    </PlausibleProvider>
   )
 }
 
